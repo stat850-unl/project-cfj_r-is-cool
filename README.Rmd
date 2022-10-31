@@ -30,10 +30,15 @@ Once you have received feedback on your project proposal (via Canvas) you may al
 ## Data Set
 Provide a link to your dataset here, and a description of the variables in the data set.
 
+https://prism.oregonstate.edu/explorer/tmp/TsuDeeu02CXPNDjf/PRISM_ppt_tmean_stable_4km_198501_201012_45.0000_-123.0000.csv
+
 
 ## Potential Topics to Explore Using the Data Set
 Describe avenues you might explore using the data
+Rainfall and Temperature: This data was obtained from the Prism Climate Group website (https://prism.oregonstate.edu). It is not in very good shape. But the data, generally, has three variables: date, mean monthly temperature (tmean; degree Celcius), and total monthly rainfall (ppt; mm). The date span from January 1985 to December 2010.
 
 ## Group Members
 List all of the project contributors here.
-
+John Mensah
+Frank Agyemang
+Chris
