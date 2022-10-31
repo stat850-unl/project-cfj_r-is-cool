@@ -32,6 +32,7 @@ Provide a link to your dataset here, and a description of the variables in the d
 
 https://prism.oregonstate.edu/explorer/tmp/TsuDeeu02CXPNDjf/PRISM_ppt_tmean_stable_4km_198501_201012_45.0000_-123.0000.csv
 
+Drought Data: This data was obtained from https://spei.csic.es. It is a website that grants free access to global drought data. The drought was measured as a standardized precipitation evapotranspiration index (SPEI) - which means it accounts for the combined effect of temperature and rainfall. The dataset span from January 1950 to September 2020. However, we will only filter out data from January 1990 to December 2009, which is the period that covers the monitoring period of our plant population data. The drought data was obtained for the specific study site (Arapaho Prairie Reserve) using the GPS coordinate of the site(Lat: 41.492004    Long: -101.84592). The link to the drought data is here: https://soton.eead.csic.es/spei/task/done/SPEI_41.25_-101.75.csv
 
 ## Potential Topics to Explore Using the Data Set
 Describe avenues you might explore using the data
@@ -41,4 +42,4 @@ Rainfall and Temperature: This data was obtained from the Prism Climate Group we
 List all of the project contributors here.
 John Mensah
 Frank Agyemang
-Chris
+Christian Uwineza
