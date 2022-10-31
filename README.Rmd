@@ -1,6 +1,6 @@
 ---
 title: "Stat 850 Project Description"
-author: "Firstname Lastname, Firstname Lastname, ..."
+author: "Agyemang, Frank, Kusi"
 output: github_document
 ---
 
@@ -29,6 +29,7 @@ Once you have received feedback on your project proposal (via Canvas) you may al
 
 ## Data Set
 Provide a link to your dataset here, and a description of the variables in the data set.
+
 
 ## Potential Topics to Explore Using the Data Set
 Describe avenues you might explore using the data
