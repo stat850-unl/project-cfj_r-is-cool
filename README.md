@@ -1,7 +1,7 @@
 Stat 850 Project Description
 ================
 John Mensah
-
+Frank Kusi Agyemang
 ## Instructions
 
 Each member of your team should modify this document in some way and
