@@ -49,3 +49,89 @@ List all of the project contributors here.
 John Mensah
 Frank Agyemang
 Christian Uwineza
+
+
+## Dr. Vanderplas' Exploration of the Data
+
+Ideally, this would have been something you provided as part of your data explanations :).
+
+```{r, message = F, warning = F}
+library(tidyverse)
+library(skimr)
+transitions <- read_csv("Transitions.csv") %>% select(-1) # remove row names
+weather <- read_csv("weather.data.csv") %>% select(-1) # remove row names
+fate <- read_csv("fate.trans.csv") %>% select(-1) # remove row names
+```
+
+### Weather Data
+```{r}
+skim(weather)
+```
+
+Variables: 
+
+- Year
+- Month
+- Mean monthly temperature, tmean, deg. Celsius
+- Total monthly rainfall, ppt, mm
+- SPEI_1 - what does this mean? standardized precipitation evapotranspiration index? How is it calculated? What is its' normal range?
+
+### Fate.trans.csv
+
+Where does this data come from? How do you download it (what inputs are required?)
+What does each variable mean?
+
+```{r}
+skim(fate)
+```
+
+Variables:
+
+- Genet
+- Ramet
+- Year
+- Month1
+- stage2
+- PrevStage
+- PrevYear
+- NextStage
+- NextYear
+- firstYear
+- firstStage
+- lastYear
+- lastStage
+
+This data seems to be coded in a way that might be very redundant? Can you explain why it is formatted this way and what you might have to do to make it tidy? What units are the variables in? How does it connect to your other datasets?
+
+### transitions.csv
+
+
+Where does this data come from? How do you download it (what inputs are required?)
+What does each variable mean?  What units are the variables in? How does it connect to your other datasets?
+
+Variables: 
+
+- Year
+- Month1
+- Dead
+- F
+- MR
+- PD
+- S
+- SR
+- UK
+
+The labels here seem to be similar to the stages in the previous dataset, but what is stored in the columns? Counts? I can't figure this out.
+
+### Overall assessment
+
+At the moment, I don't have any idea about
+
+- the provenance of this data (what do I have to do to get the same files you have?)
+- what the variables mean
+- how the datasets are connected
+- what analysis/visualizations you plan to do with the data
+
+Because of this, I can't figure out whether your data meet the bare minimum requirements for the project. You seem to have enough cases and variables, but without knowing what the variables mean and what the structure is, I can't guarantee that you have information that will give you enough to work with to meet my expectations on this project. 
+
+Please consider making an appointment with me to discuss so that we can work this out - I want to help  and I want you to do a project on data that's interesting to you, but I also have to make sure I'm setting you up for success. 
