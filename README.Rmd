@@ -40,9 +40,12 @@ Drought Data: This data was obtained from https://spei.csic.es. It is a website 
 
 > This link also doesn't work for me - Dr. Vanderplas
 
+Rainfall and Temperature: This data was obtained from the Prism Climate Group website (https://prism.oregonstate.edu). It is not in very good shape. But the data, generally, has three variables: date, mean monthly temperature (tmean; degree Celcius), and total monthly rainfall (ppt; mm). The date span from January 1985 to December 2010.
+
 ## Potential Topics to Explore Using the Data Set
 Describe avenues you might explore using the data
-Rainfall and Temperature: This data was obtained from the Prism Climate Group website (https://prism.oregonstate.edu). It is not in very good shape. But the data, generally, has three variables: date, mean monthly temperature (tmean; degree Celcius), and total monthly rainfall (ppt; mm). The date span from January 1985 to December 2010.
+
+> This still needs to be filled in - the rainfall and temperature stuff is a dataset, not an exploration topic
 
 ## Group Members
 List all of the project contributors here.
@@ -135,3 +138,9 @@ At the moment, I don't have any idea about
 Because of this, I can't figure out whether your data meet the bare minimum requirements for the project. You seem to have enough cases and variables, but without knowing what the variables mean and what the structure is, I can't guarantee that you have information that will give you enough to work with to meet my expectations on this project. 
 
 Please consider making an appointment with me to discuss so that we can work this out - I want to help  and I want you to do a project on data that's interesting to you, but I also have to make sure I'm setting you up for success. 
+
+### What I still need:
+
+- Variable explanations, how the datasets are connected
+
+- What, specifically, are you going to do with this data? Are you going to make a shiny applet to show how drought conditions are related to SPEI? That seems like an obvious thing, but is there something not-so-obvious that I'm missing? Are you going to map this spatially? Create animations to show the extent of drought in an area over time? I really can't figure out what the goal is here.
