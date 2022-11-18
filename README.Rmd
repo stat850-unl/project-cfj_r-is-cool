@@ -30,22 +30,18 @@ Once you have received feedback on your project proposal (via Canvas) you may al
 ## Data Set
 Provide a link to your dataset here, and a description of the variables in the data set.
 
-https://prism.oregonstate.edu/explorer/tmp/TsuDeeu02CXPNDjf/PRISM_ppt_tmean_stable_4km_198501_201012_45.0000_-123.0000.csv
+https://www.kaggle.com/datasets/thedevastator/fifa-world-cup-anomaly-detection-in-player-ratin?select=players_20.csv
 
-> This link doesn't work for me. - Dr. Vanderplas
 
-Drought Data: This data was obtained from https://spei.csic.es. It is a website that grants free access to global drought data. The drought was measured as a standardized precipitation evapotranspiration index (SPEI) - which means it accounts for the combined effect of temperature and rainfall. The dataset span from January 1950 to September 2020. However, we will only filter out data from January 1990 to December 2009, which is the period that covers the monitoring period of our plant population data. The drought data was obtained for the specific study site (Arapaho Prairie Reserve) using the GPS coordinate of the site(Lat: 41.492004    Long: -101.84592). The link to the drought data is here: https://soton.eead.csic.es/spei/task/done/SPEI_41.25_-101.75.csv
+Football Data: This data was obtained from https://kaggle.com. It is a website that grants free access to data on vast topics.  The data comprises of several variables that can be used for interesting analysis in FIFA World Cup. The Fifa World Cup is the biggest stage in international football, and the players that take part in it are some of the best in the world. But what goes into making a great World Cup player? Is it the wage of a player? Is it their individual ratings for specific skillsets?  Or something unrelated to the variables considered in this dataset?
 
-> This seems to have date and SPEI data, which is 2 variables. 
+This dataset contains information on players overall ratings, as well as their individual ratings for specific skillsets. This data can be used to probe into so many aspects related to the World Cup and its players, including anomaly detection for player ratings.
 
-> This link also doesn't work for me - Dr. Vanderplas
-
-Rainfall and Temperature: This data was obtained from the Prism Climate Group website (https://prism.oregonstate.edu). It is not in very good shape. But the data, generally, has three variables: date, mean monthly temperature (tmean; degree Celcius), and total monthly rainfall (ppt; mm). The date span from January 1985 to December 2010.
 
 ## Potential Topics to Explore Using the Data Set
 Describe avenues you might explore using the data
 
-> This still needs to be filled in - the rainfall and temperature stuff is a dataset, not an exploration topic
+
 
 ## Group Members
 List all of the project contributors here.
@@ -73,11 +69,35 @@ skim(weather)
 
 Variables: 
 
-- Year
-- Month
-- Mean monthly temperature, tmean, deg. Celsius
-- Total monthly rainfall, ppt, mm
-- SPEI_1 - what does this mean? standardized precipitation evapotranspiration index? How is it calculated? What is its' normal range?
+- player_url
+- short_name
+- long_name
+- age
+- Date of Birth
+- height_cm
+- weight_kg
+- nationality
+- club
+- overall
+- potential
+- value_eur
+- wage_eur
+- player_positions
+- preferred_foot
+- weak_foot
+- skill_moves
+- work_rate
+- body_type
+- player_traits
+- attacking_crossing
+- attacking_finishing
+- attacking_volleys
+- skill_dribbling
+- skill_curve
+- movement_balance
+- movement_reactions
+- power_jumping
+- power_stamina
 
 ### Fate.trans.csv
 
