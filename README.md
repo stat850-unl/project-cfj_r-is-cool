@@ -17,28 +17,63 @@ you may alter this README so that it describes your final project
 instead of the project proposal.
 
 ## Data Set
-### Plant Population Data
-We will use a 20-year time series data of a perennial herbaceous plant population (Cirsium undulantum) sampled at Arapaho Prairie reserve. The plant species is a thistle plant and a rosette that reproduces both vegetatively and sexually (but the sexual reproduction is suicidal; that is the plant’s ramet dies after sexual reproduction living). This thistle plant has five life stages: seedlings (S), single rosette (SR), multiple rosettes (MR), prolong dormancy (UK; Prolong dormancy is the stage where the plant stay below for a year or more. In most cases, the plant could be mistakenly regarded as dead but in actual case it is alive. If conditions becomes favorable it will sprout again. This stage is different from the normal seasonal dormancy where the plant on goes into dormancy in the Fall season through to the Winter season and sprout during the Spring season), and reproduction stage (F). We have information for each plant individual that was tagged, and its performance was tracked from the first year it was observed till the last year it was recorded as dead. This information is available for every year that the plant was alive for both early and late seasons. In the data set, we know the first year the plant appeared, the first stage, the last year and stage, the previous year and stage, the next year and stage, and the current year and stage for each plant individual. There are a total of 651 plant individuals and over 4500 records. The categorical variable here is the 6 plant stages (named as stage1): seedlings (S), single rosette (SR), multiple rosettes (MR), prolong dormancy (UK), and reproduction stage (F). The plant population was monitored for early season (M as May) and late season (J as July) - this could be found under the Month1 column.  
-The data is still in it raw state (even though a lot of work has been done before to clean it up and put it in a more meaningful format or structure as it appears now). Genet represent a distinct plant individual and the Ramets represents different shoots growing up from the Genet. 
-The link to the biological data is as below.
-https://github.com/stat850-unl/project-cfj_r-is-cool/blob/master/fate.trans.csv
+This is data is about FIFA World Cup players and their ratings. 
+This dataset contains detailed data related to the FIFA World Cup, including information on players' overall ratings, as well as their individual ratings for specific skillsets. The data can be downloaded from from kaggle using this link,
+https://www.kaggle.com/datasets/thedevastator/fifa-world-cup-anomaly-detection-in-player-ratin?select=players_20.csv. The data is made up of 18278 observations and 104 variables. Below is a detailed description of the dataset for the variables most appropriate for our study. 
+#n name	                         Description 
+player_url	                    The URL of the player's FIFA profile. (String)
+short_name	                    The player's short name. (String)
+long_name	                      The player's long name. (String)
+age	                            The player's age. (Integer)
+dob	                            The player's date of birth. (String)
+height_cm	                      The player's height in centimeters.
+weight_kg	                      The player's weight in kilograms.
+nationality	                    The player's nationality. (String)
+club	                          The player's club. (String)
+overall	                        The player's overall rating. (Integer)
+potential	                      The player's potential rating. (Integer)
+value_eur	                      The player's value in Euros. (Integer)
+wage_eur	                      The player's wage in Euros. (Integer)
+player_positions	              The player's positions. (String)
+preferred_foot	                The player's preferred foot. (String)
+international_reputation	      The player's international reputation. (Integer)
+weak_foot	                      The player's weak foot rating. (Integer)
+skill_moves	                    The player's skill moves rating. (Integer)
+work_rate	                      The player's work rate. (String)
+body_type	                      The player's body type. (String)
+gk_positioning	                The player's goalkeeper positioning. (Integer)
+player_traits	                  The player's traits. (String)
+attacking_crossing	            The player's crossing. (Integer)
+attacking_finishing	            The player's finishing. (Integer)
+attackingheadingaccuracy	      The player's heading accuracy. (Integer)
+attackingshortpassing	          The player's short passing.
+attacking_volleys	              The player's volleys. (Integer)
+skill_dribbling	                The player's dribbling.
+skill_curve	                    The player's curve. (Integer)
+skillfkaccuracy	                The player's free kick accuracy. (Integer)
+skilllongpassing	              The player's long passing. (Integer)
+skillballcontrol	              The player's ball control. (Integer)
+movement_acceleration	          The player's acceleration. (Integer)
+movementsprintspeed	            The player's sprint speed. (Integer)
+movement_agility	              The player's agility. (Integer)
+movement_reactions	            The player's reactions. (Integer)
+movement_balance	              The player's balance. (Integer)
+powershotpower	                The player's shot power. (Integer)
+power_jumping	                  The player's jumping. (Integer)
+power_stamina	                  The player's stamina. (Integer)
 
 
-### Weather Data
-* Drought Data: This data was obtained from https://spei.csic.es. It is a website that grants free access to global drought data. The drought was measured as a standardized precipitation evapotranspiration index (SPEI) - which means it accounts for the combined effect of temperature and rainfall. The dataset span from January 1989 to December 2020.  The drought data was obtained for the specific study site (Arapaho Prairie Reserve) using the GPS coordinate of the site(Lat: 41.492004    Long: -101.84592). The link to the drought data is here: https://github.com/stat850-unl/project-cfj_r-is-cool/blob/master/weather.data.csv. The column name SPEI_1 represent the drought data.
-
-* Rainfall and Temperature: This data was obtained from the Prism Climate Group website (https://prism.oregonstate.edu).  The date span from January 1985 to December 2010. The link to the rainfall and temperature data is as below.
-https://github.com/stat850-unl/project-cfj_r-is-cool/blob/master/weather.data.csv
 
 ## Potential Topics to Explore Using the Data Set
+The FIFA World Cup is the biggest stage of international football, and the players that take part in it are some of the bests in the world. But what goes into earning a call-up to play at the FIFA World Cup? Is it their overall rating? Their individual ratings for specific skill sets? Does the player's physical structure and age matter? In this study, we will implement both quantitative and qualitative analysis to evaluate the key determinant of the overall rating of FIFA World cup players. We mainly seek to address the following topics.
+1. The interrelationship among players' individual ratings. This is to help understand the trade-off in players' specific quality sets in terms of attacking, movement, power, defending, goalkeeping, mentality, and skills. We will address this via cross-correlation and covariance analysis of these individual player-specific qualities. The cross-correlation analysis will produce the magnitude and direction of the association existing among these individual player-specific qualities - are these qualities related in some way? The covariance analysis will be implemented to assess trade-offs that may exist among these qualities - do players invest in improving specific qualities while neglecting others? We will use cross-correlation or covariance matrix plots to visualize our result. 
+We will also use a histogram to visualize the distribution of these individual player qualities to get an overview of how these qualities a distributed among the FIFA world cup players. We also compare these qualities to find out which is most represented at the FIFA world cup. This will give us an overview of what qualifies one to earn a call-up to the FIFA World cup.
 
-Climate change is unarguably having a significant impact on plant species, in terms of their diversity and population dynamics. The shift in rainfall patterns and increasing temperature are implications or major components of climate change. Understanding how climate change may influence plant demography involves predicting the relationship between variations in weather and plant populations over time. However, studies that incorporate long-term observational studies to predict the effect of climate change are scarce. Probably because long-term observational data are costly. But predicting climate change's effect on plant populations from long-term observational data is particularly important due to the possibility to capture plants' responses to seasonal variations. 
-Seasonal variations are very critical components or determinants of plant survival and population growth. The fate of many plant individuals from one season to the other is dependent on the magnitude and extent of weather conditions experienced by the plant individual before, during, or after a particular season. For instance, a very dry and warm summer/fall season could reduce the overwintering survival of a plant population. Likewise, dry winter conditions could also suppress plant performance during the growing season. Understanding the dynamics of seasonal variation and its impact on plant populations is very important for population ecologists, especially when choosing the appropriate monitoring period for their study. For instance, deciding between conducting repeated measurements or one-time measurements each year. Making such decisions are very important because field monitoring demands a lot of financial and human resource inputs and making the right decision to collect the right data at the appropriate time period is very critical. The aim of this study is to evaluate the density of plant population under three different monitoring periods that capture different seasonal variations (i.e., early season and late season periods). Specifically, we will examine the number of plant individuals  for each of the six life stages (i.e., seedlings (S), single rosette (SR), multiple rosettes (MR), prolong dormancy (UK), and reproduction stage (F)) to quantity
-1.	overwinter performance of plant population by considering plant population from the late season (July) of the current year to the early season (May) of the next year. 
-2.	between-year performance by considering plant population from the late (July) season of the current year to the late year season (July) of the next year. 
-3.	between-season performance by considering plant population from the early season (May) to the late season (July) of the same year. 
+2. How do these individual player ratings contribute to the overall rating of the player? Here, will build a set of different models and perform a model selection of to identify which qualities of the players contribute mostly to the overall ratings of a player. The best-fitted model will be visualized using scatter diagrams to look at the relationship between the predictors from the final model and the response variable (i.e., the overall rating). 
 
-In addition, we will correlate the the population density of each life stage with weather conditions (temperature, rainfall, and drought) experienced by the plant population during the same period (i.e., overwintering, between-season, and between-year performance). This is to understand how weather conditions during these different periods are likely to influence plant population dynamics. 
+3. Do players' body stature (height, weight, and body type (unique, normal, lean, stocky)), age, and international reputation influence both individual qualities and overall rating? Here, we use principal component analysis to evaluate the percentage variation explained by each of these variables on individual qualities. We will use a PCA plot to visualize this result. For the effect of body stature, age, and international reputation on overall rating, we will use regression analysis. 
+
+4. Which player-specific traits are most dominant or represented at the FIFA World cup? The play traits are a qualitative variable that describes the specialties of each of the players whether a player is a dribbler, long-range shooter, clinical finisher, or acrobat. Since this variable is text rich, will conduct text analysis to summarize the various player traits to identify which trait is most common among FIFA World Cup players.  
 
 
 ## Group Members
