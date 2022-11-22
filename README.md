@@ -1,7 +1,7 @@
 Stat 850 Project Description
 ================
-John Mensah
-Frank Kusi Agyemang
+Agyemang, Frank, Kusi
+
 ## Instructions
 
 Each member of your team should modify this document in some way and
@@ -17,30 +17,211 @@ you may alter this README so that it describes your final project
 instead of the project proposal.
 
 ## Data Set
-### Plant Population Data
-We will use a 20-year time series data of a perennial herbaceous plant population (Cirsium undulantum) sampled at Arapaho Prairie reserve. The plant species is a thistle plant and a rosette that reproduces both vegetatively and sexually (but the sexual reproduction is suicidal; that is the plant’s ramet dies after sexual reproduction living). This thistle plant has five life stages: seedlings (S), single rosette (SR), multiple rosettes (MR), prolong dormancy (UK; Prolong dormancy is the stage where the plant stay below for a year or more. In most cases, the plant could be mistakenly regarded as dead but in actual case it is alive. If conditions becomes favorable it will sprout again. This stage is different from the normal seasonal dormancy where the plant on goes into dormancy in the Fall season through to the Winter season and sprout during the Spring season), and reproduction stage (F). We have information for each plant individual that was tagged, and its performance was tracked from the first year it was observed till the last year it was recorded as dead. This information is available for every year that the plant was alive for both early and late seasons. In the data set, we know the first year the plant appeared, the first stage, the last year and stage, the previous year and stage, the next year and stage, and the current year and stage for each plant individual. There are a total of 651 plant individuals and over 4500 records. The categorical variable here is the 6 plant stages (named as stage1): seedlings (S), single rosette (SR), multiple rosettes (MR), prolong dormancy (UK), and reproduction stage (F). The plant population was monitored for early season (M as May) and late season (J as July) - this could be found under the Month1 column.  
-The data is still in it raw state (even though a lot of work has been done before to clean it up and put it in a more meaningful format or structure as it appears now). Genet represent a distinct plant individual and the Ramets represents different shoots growing up from the Genet. 
-The link to the biological data is as below.
-https://github.com/stat850-unl/project-cfj_r-is-cool/blob/master/fate.trans.csv
 
+Provide a link to your dataset here, and a description of the variables
+in the data set.
 
-### Weather Data
-* Drought Data: This data was obtained from https://spei.csic.es. It is a website that grants free access to global drought data. The drought was measured as a standardized precipitation evapotranspiration index (SPEI) - which means it accounts for the combined effect of temperature and rainfall. The dataset span from January 1989 to December 2020.  The drought data was obtained for the specific study site (Arapaho Prairie Reserve) using the GPS coordinate of the site(Lat: 41.492004    Long: -101.84592). The link to the drought data is here: https://github.com/stat850-unl/project-cfj_r-is-cool/blob/master/weather.data.csv. The column name SPEI_1 represent the drought data.
+<https://www.kaggle.com/datasets/thedevastator/fifa-world-cup-anomaly-detection-in-player-ratin?select=players_20.csv>
 
-* Rainfall and Temperature: This data was obtained from the Prism Climate Group website (https://prism.oregonstate.edu).  The date span from January 1985 to December 2010. The link to the rainfall and temperature data is as below.
-https://github.com/stat850-unl/project-cfj_r-is-cool/blob/master/weather.data.csv
+Football Data: This data was obtained from <https://kaggle.com>. It is a
+website that grants free access to data on vast topics. The data
+comprises of several variables that can be used for interesting analysis
+in FIFA World Cup. The Fifa World Cup is the biggest stage in
+international football, and the players that take part in it are some of
+the best in the world. But what goes into making a great World Cup
+player? Is it the wage of a player? Is it their individual ratings for
+specific skillsets? Or something unrelated to the variables considered
+in this dataset?
+
+This dataset contains information on players overall ratings, as well as
+their individual ratings for specific skillsets. This data can be used
+to probe into so many aspects related to the World Cup and its players,
+including anomaly detection for player ratings.
 
 ## Potential Topics to Explore Using the Data Set
 
-Climate change is unarguably having a significant impact on plant species, in terms of their diversity and population dynamics. The shift in rainfall patterns and increasing temperature are implications or major components of climate change. Understanding how climate change may influence plant demography involves predicting the relationship between variations in weather and plant populations over time. However, studies that incorporate long-term observational studies to predict the effect of climate change are scarce. Probably because long-term observational data are costly. But predicting climate change's effect on plant populations from long-term observational data is particularly important due to the possibility to capture plants' responses to seasonal variations. 
-Seasonal variations are very critical components or determinants of plant survival and population growth. The fate of many plant individuals from one season to the other is dependent on the magnitude and extent of weather conditions experienced by the plant individual before, during, or after a particular season. For instance, a very dry and warm summer/fall season could reduce the overwintering survival of a plant population. Likewise, dry winter conditions could also suppress plant performance during the growing season. Understanding the dynamics of seasonal variation and its impact on plant populations is very important for population ecologists, especially when choosing the appropriate monitoring period for their study. For instance, deciding between conducting repeated measurements or one-time measurements each year. Making such decisions are very important because field monitoring demands a lot of financial and human resource inputs and making the right decision to collect the right data at the appropriate time period is very critical. The aim of this study is to evaluate the density of plant population under three different monitoring periods that capture different seasonal variations (i.e., early season and late season periods). Specifically, we will examine the number of plant individuals  for each of the six life stages (i.e., seedlings (S), single rosette (SR), multiple rosettes (MR), prolong dormancy (UK), and reproduction stage (F)) to quantity
-1.	overwinter performance of plant population by considering plant population from the late season (July) of the current year to the early season (May) of the next year. 
-2.	between-year performance by considering plant population from the late (July) season of the current year to the late year season (July) of the next year. 
-3.	between-season performance by considering plant population from the early season (May) to the late season (July) of the same year. 
+Describe avenues you might explore using the data 1. Anomaly detection
+for player ratings: This is where we try to determine an association
+between the overall rating of a player (s) and all other quantitative
+variables. This will be done in a pair-wise manner.
 
-In addition, we will correlate the the population density of each life stage with weather conditions (temperature, rainfall, and drought) experienced by the plant population during the same period (i.e., overwintering, between-season, and between-year performance). This is to understand how weather conditions during these different periods are likely to influence plant population dynamics. 
+2.  We will look at the distribution of each of the variables to
+    determine whether it satisfies the normality assumption and then
+    make plots that shows the spread of each quantitative variable from
+    its mean.
 
+3.  We also consider the overall player rating and regress it on some
+    variables of interest.
 
 ## Group Members
 
-John Mensah, Frank Agyemang, Christian Uwineza. 
+List all of the project contributors here. John Mensah Frank Agyemang
+Christian Uwineza
+
+## Dr. Vanderplas’ Exploration of the Data
+
+Ideally, this would have been something you provided as part of your
+data explanations :).
+
+|                                                  |               |
+|:-------------------------------------------------|:--------------|
+| Name                                             | football_data |
+| Number of rows                                   | 18278         |
+| Number of columns                                | 8             |
+| \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_   |               |
+| Column type frequency:                           |               |
+| character                                        | 2             |
+| numeric                                          | 6             |
+| \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ |               |
+| Group variables                                  | None          |
+
+Data summary
+
+**Variable type: character**
+
+| skim_variable    | n_missing | complete_rate | min | max | empty | n_unique | whitespace |
+|:-----------------|----------:|--------------:|----:|----:|------:|---------:|-----------:|
+| body_type        |         0 |             1 |   4 |  19 |     0 |       10 |          0 |
+| player_positions |         0 |             1 |   2 |  12 |     0 |      643 |          0 |
+
+**Variable type: numeric**
+
+| skim_variable   | n_missing | complete_rate |   mean |       sd |  p0 |  p25 |  p50 |  p75 |   p100 | hist  |
+|:----------------|----------:|--------------:|-------:|---------:|----:|-----:|-----:|-----:|-------:|:------|
+| age             |         0 |             1 |   25.3 |     4.66 |  16 |   22 |   25 |   29 |     42 | ▆▇▆▂▁ |
+| wage_eur        |         0 |             1 | 9456.9 | 21351.71 |   0 | 1000 | 3000 | 8000 | 565000 | ▇▁▁▁▁ |
+| potential       |         0 |             1 |   71.5 |     6.14 |  49 |   67 |   71 |   75 |     95 | ▁▃▇▃▁ |
+| skill_dribbling |         0 |             1 |   55.6 |    18.93 |   4 |   50 |   61 |   68 |     97 | ▂▁▅▇▁ |
+| skill_curve     |         0 |             1 |   47.3 |    18.42 |   6 |   34 |   49 |   62 |     94 | ▃▆▇▇▁ |
+| height_cm       |         0 |             1 |  181.4 |     6.76 | 156 |  177 |  181 |  186 |    205 | ▁▃▇▅▁ |
+
+### Weather Data
+
+          age        body_type            wage_eur        potential   
+     Min.   :16.0   Length:18278       Min.   :     0   Min.   :49.0  
+     1st Qu.:22.0   Class :character   1st Qu.:  1000   1st Qu.:67.0  
+     Median :25.0   Mode  :character   Median :  3000   Median :71.0  
+     Mean   :25.3                      Mean   :  9457   Mean   :71.5  
+     3rd Qu.:29.0                      3rd Qu.:  8000   3rd Qu.:75.0  
+     Max.   :42.0                      Max.   :565000   Max.   :95.0  
+     player_positions   skill_dribbling  skill_curve     height_cm  
+     Length:18278       Min.   : 4.0    Min.   : 6.0   Min.   :156  
+     Class :character   1st Qu.:50.0    1st Qu.:34.0   1st Qu.:177  
+     Mode  :character   Median :61.0    Median :49.0   Median :181  
+                        Mean   :55.6    Mean   :47.3   Mean   :181  
+                        3rd Qu.:68.0    3rd Qu.:62.0   3rd Qu.:186  
+                        Max.   :97.0    Max.   :94.0   Max.   :205  
+
+Variables:
+
+-   player_url
+-   short_name
+-   long_name
+-   age
+-   Date of Birth
+-   height_cm
+-   weight_kg
+-   nationality
+-   club
+-   overall
+-   potential
+-   value_eur
+-   wage_eur
+-   player_positions
+-   preferred_foot
+-   weak_foot
+-   skill_moves
+-   work_rate
+-   body_type
+-   player_traits
+-   attacking_crossing
+-   attacking_finishing
+-   attacking_volleys
+-   skill_dribbling
+-   skill_curve
+-   movement_balance
+-   movement_reactions
+-   power_jumping
+-   power_stamina
+
+### Fate.trans.csv
+
+Where does this data come from? How do you download it (what inputs are
+required?) What does each variable mean?
+
+    Error in skim(fate): object 'fate' not found
+
+Variables:
+
+-   Genet
+-   Ramet
+-   Year
+-   Month1
+-   stage2
+-   PrevStage
+-   PrevYear
+-   NextStage
+-   NextYear
+-   firstYear
+-   firstStage
+-   lastYear
+-   lastStage
+
+This data seems to be coded in a way that might be very redundant? Can
+you explain why it is formatted this way and what you might have to do
+to make it tidy? What units are the variables in? How does it connect to
+your other datasets?
+
+### transitions.csv
+
+Where does this data come from? How do you download it (what inputs are
+required?) What does each variable mean? What units are the variables
+in? How does it connect to your other datasets?
+
+Variables:
+
+-   Year
+-   Month1
+-   Dead
+-   F
+-   MR
+-   PD
+-   S
+-   SR
+-   UK
+
+The labels here seem to be similar to the stages in the previous
+dataset, but what is stored in the columns? Counts? I can’t figure this
+out.
+
+### Overall assessment
+
+At the moment, I don’t have any idea about
+
+-   the provenance of this data (what do I have to do to get the same
+    files you have?)
+-   what the variables mean
+-   how the datasets are connected
+-   what analysis/visualizations you plan to do with the data
+
+Because of this, I can’t figure out whether your data meet the bare
+minimum requirements for the project. You seem to have enough cases and
+variables, but without knowing what the variables mean and what the
+structure is, I can’t guarantee that you have information that will give
+you enough to work with to meet my expectations on this project.
+
+Please consider making an appointment with me to discuss so that we can
+work this out - I want to help and I want you to do a project on data
+that’s interesting to you, but I also have to make sure I’m setting you
+up for success.
+
+### What I still need:
+
+-   Variable explanations, how the datasets are connected
+
+-   What, specifically, are you going to do with this data? Are you
+    going to make a shiny applet to show how drought conditions are
+    related to SPEI? That seems like an obvious thing, but is there
+    something not-so-obvious that I’m missing? Are you going to map this
+    spatially? Create animations to show the extent of drought in an
+    area over time? I really can’t figure out what the goal is here.
