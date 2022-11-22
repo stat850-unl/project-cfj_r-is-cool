@@ -40,7 +40,11 @@ This dataset contains information on players overall ratings, as well as their i
 
 ## Potential Topics to Explore Using the Data Set
 Describe avenues you might explore using the data
+1. Anomaly detection for player ratings: This is where we try to determine an association between the overall rating of a player (s) and all other quantitative variables. This will be done in a pair-wise manner.
 
+2. We will look at the distribution of each of the variables to determine whether it satisfies the normality assumption and then make plots that shows the spread of each quantitative variable from its mean.
+
+3. We also consider the overall player rating and regress it on some variables of interest.
 
 
 ## Group Members
@@ -57,14 +61,17 @@ Ideally, this would have been something you provided as part of your data explan
 ```{r, message = F, warning = F}
 library(tidyverse)
 library(skimr)
-transitions <- read_csv("Transitions.csv") %>% select(-1) # remove row names
-weather <- read_csv("weather.data.csv") %>% select(-1) # remove row names
-fate <- read_csv("fate.trans.csv") %>% select(-1) # remove row names
+library(dplyr)
+football_data <- read.csv("players_20.csv")%>%
+  select(age,body_type,wage_eur, potential,player_positions,skill_dribbling, skill_curve, height_cm)
+skim(football_data)
+
 ```
 
 ### Weather Data
 ```{r}
-skim(weather)
+summary(football_data)
+
 ```
 
 Variables: 
