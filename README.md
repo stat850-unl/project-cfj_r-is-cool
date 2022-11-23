@@ -67,11 +67,11 @@ data explanations :).
 |:-------------------------------------------------|:--------------|
 | Name                                             | football_data |
 | Number of rows                                   | 18278         |
-| Number of columns                                | 8             |
+| Number of columns                                | 9             |
 | \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_   |               |
 | Column type frequency:                           |               |
 | character                                        | 2             |
-| numeric                                          | 6             |
+| numeric                                          | 7             |
 | \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ |               |
 | Group variables                                  | None          |
 
@@ -94,6 +94,7 @@ Data summary
 | skill_dribbling |         0 |             1 |   55.6 |    18.93 |   4 |   50 |   61 |   68 |     97 | ▂▁▅▇▁ |
 | skill_curve     |         0 |             1 |   47.3 |    18.42 |   6 |   34 |   49 |   62 |     94 | ▃▆▇▇▁ |
 | height_cm       |         0 |             1 |  181.4 |     6.76 | 156 |  177 |  181 |  186 |    205 | ▁▃▇▅▁ |
+| overall         |         0 |             1 |   66.2 |     6.95 |  48 |   62 |   66 |   71 |     94 | ▂▇▇▂▁ |
 
 ### Weather Data
 
@@ -104,13 +105,13 @@ Data summary
      Mean   :25.3                      Mean   :  9457   Mean   :71.5  
      3rd Qu.:29.0                      3rd Qu.:  8000   3rd Qu.:75.0  
      Max.   :42.0                      Max.   :565000   Max.   :95.0  
-     player_positions   skill_dribbling  skill_curve     height_cm  
-     Length:18278       Min.   : 4.0    Min.   : 6.0   Min.   :156  
-     Class :character   1st Qu.:50.0    1st Qu.:34.0   1st Qu.:177  
-     Mode  :character   Median :61.0    Median :49.0   Median :181  
-                        Mean   :55.6    Mean   :47.3   Mean   :181  
-                        3rd Qu.:68.0    3rd Qu.:62.0   3rd Qu.:186  
-                        Max.   :97.0    Max.   :94.0   Max.   :205  
+     player_positions   skill_dribbling  skill_curve     height_cm      overall    
+     Length:18278       Min.   : 4.0    Min.   : 6.0   Min.   :156   Min.   :48.0  
+     Class :character   1st Qu.:50.0    1st Qu.:34.0   1st Qu.:177   1st Qu.:62.0  
+     Mode  :character   Median :61.0    Median :49.0   Median :181   Median :66.0  
+                        Mean   :55.6    Mean   :47.3   Mean   :181   Mean   :66.2  
+                        3rd Qu.:68.0    3rd Qu.:62.0   3rd Qu.:186   3rd Qu.:71.0  
+                        Max.   :97.0    Max.   :94.0   Max.   :205   Max.   :94.0  
 
 Variables:
 
@@ -143,85 +144,14 @@ Variables:
 -   movement_reactions
 -   power_jumping
 -   power_stamina
-
-### Fate.trans.csv
-
-Where does this data come from? How do you download it (what inputs are
-required?) What does each variable mean?
-
-    Error in skim(fate): object 'fate' not found
-
-Variables:
-
--   Genet
--   Ramet
--   Year
--   Month1
--   stage2
--   PrevStage
--   PrevYear
--   NextStage
--   NextYear
--   firstYear
--   firstStage
--   lastYear
--   lastStage
-
-This data seems to be coded in a way that might be very redundant? Can
-you explain why it is formatted this way and what you might have to do
-to make it tidy? What units are the variables in? How does it connect to
-your other datasets?
-
-### transitions.csv
-
-Where does this data come from? How do you download it (what inputs are
-required?) What does each variable mean? What units are the variables
-in? How does it connect to your other datasets?
-
-Variables:
-
--   Year
--   Month1
--   Dead
--   F
--   MR
--   PD
--   S
--   SR
--   UK
-
-The labels here seem to be similar to the stages in the previous
-dataset, but what is stored in the columns? Counts? I can’t figure this
-out.
+-   overall
 
 ### Overall assessment
 
 At the moment, I don’t have any idea about
 
--   the provenance of this data (what do I have to do to get the same
-    files you have?)
--   what the variables mean
--   how the datasets are connected
--   what analysis/visualizations you plan to do with the data
-
-Because of this, I can’t figure out whether your data meet the bare
-minimum requirements for the project. You seem to have enough cases and
-variables, but without knowing what the variables mean and what the
-structure is, I can’t guarantee that you have information that will give
-you enough to work with to meet my expectations on this project.
-
-Please consider making an appointment with me to discuss so that we can
-work this out - I want to help and I want you to do a project on data
-that’s interesting to you, but I also have to make sure I’m setting you
-up for success.
-
-### What I still need:
-
--   Variable explanations, how the datasets are connected
-
--   What, specifically, are you going to do with this data? Are you
-    going to make a shiny applet to show how drought conditions are
-    related to SPEI? That seems like an obvious thing, but is there
-    something not-so-obvious that I’m missing? Are you going to map this
-    spatially? Create animations to show the extent of drought in an
-    area over time? I really can’t figure out what the goal is here.
+-   To obtain this file you would need to use the link
+    <https://kaggle.com>.
+-   The variables selected for analysis would give an insight into what
+    contributes to the overall rating a player.
+-   Histograms, Scatterplots, Boxplots.
