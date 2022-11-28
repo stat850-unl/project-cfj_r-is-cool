@@ -1,0 +1,166 @@
+---
+title: "Stat 850 Project Description"
+author: "Agyemang, Frank, Kusi"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+options(digits = 3)
+```
+
+```{r load-sas-libraries, echo = F, message = F, warning = F}
+
+saspath <- "/usr/local/SASHome/SASFoundation/9.4/bin/sas_en" # Your SAS path goes here
+sasopts <- "-ls 75"
+knitr::opts_chunk$set(engine.path=list(sas=saspath, saslog=saspath, sashtml=saspath),
+                      engine.opts=list(sas=sasopts, saslog=sasopts, sashtml=sasopts), 
+                      comment=NA)
+library(SASmarkdown)
+```
+
+## Instructions
+
+Each member of your team should modify this document in some way and push their modifications to the repository in a separate commit. This will ensure that you have set your repository up in a way that ensures all group members are working with the same repository. 
+
+Note that you must compile your readme (this document) for it to properly display as part of your github repository. 
+
+Once you have received feedback on your project proposal (via Canvas) you may alter this README so that it describes your final project instead of the project proposal. 
+
+## Data Set
+Provide a link to your dataset here, and a description of the variables in the data set.
+
+https://www.kaggle.com/datasets/thedevastator/fifa-world-cup-anomaly-detection-in-player-ratin?select=players_20.csv
+
+
+Football Data: This data was obtained from https://kaggle.com. It is a website that grants free access to data on vast topics.  The data comprises of several variables that can be used for interesting analysis in FIFA World Cup. The Fifa World Cup is the biggest stage in international football, and the players that take part in it are some of the best in the world. But what goes into making a great World Cup player? Is it the wage of a player? Is it their individual ratings for specific skillsets?  Or something unrelated to the variables considered in this dataset?
+
+This dataset contains information on players overall ratings, as well as their individual ratings for specific skillsets. This data can be used to probe into so many aspects related to the World Cup and its players, including anomaly detection for player ratings.
+
+
+## Potential Topics to Explore Using the Data Set
+Describe avenues you might explore using the data
+1. Anomaly detection for player ratings: This is where we try to determine an association between the overall rating of a player (s) and all other quantitative variables. This will be done in a pair-wise manner.
+
+2. We will look at the distribution of each of the variables to determine whether it satisfies the normality assumption and then make plots that shows the spread of each quantitative variable from its mean.
+
+3. We also consider the overall player rating and regress it on some variables of interest.
+
+
+## Group Members
+List all of the project contributors here.
+John Mensah
+Frank Agyemang
+Christian Uwineza
+
+
+#I began by reading in the dataset which was obtained from kaggle.com
+Some of the variables in the data will not be useful for my analysis.
+Therefore I begin by filtering out variables that are useful for the analysis.
+Also, some variables do not contain the right inputs and a few have missing data.
+Therefore, I clean the data so that I'm left with a proper data to make my analysis.
+
+```{r, message = F, warning = F}
+library(tidyverse)
+library(skimr)
+library(dplyr)
+football_data <- read.csv("players_20.csv")
+wage_eur <- football_data$wage_eur
+seed <- 100000 
+wage_eur <- wage_eur/seed
+football_data$wage_eur <- wage_eur
+
+interested <- football_data %>%
+  select(age,body_type,wage_eur, potential,player_positions,skill_dribbling, skill_curve, height_cm, overall)
+  
+  
+#data cleaning
+interested <- interested[-c(1,2,3,10),]
+length(interested$age)
+length(interested$wage_eur)
+length(interested$player_positions)
+
+summary(interested)
+sd(interested$age)
+```
+#Exploratory data analysis
+### Correlation between variables
+I try to find the correlation between 
+But before we begin, I try to determine whether data points in each variable follows a normal distribution
+```{r}
+library(ggplot2)
+library(qqplotr)
+# age_dist = lm(interested$overall ~ interested$age, data=interested) 
+#  age_dist.sdres = rstandard(age_dist)
+age <- rnorm(interested$age,25.3, 4.66)
+ggplot(mapping = aes(sample = interested$age)) + stat_qq_point(size =100 )
+```
+
+
+```{r}
+qqnorm(age_dist.sdres, 
+    ylab="Standardized Residuals", 
+   xlab="Normality", 
+  main="Interested") 
+ qqline(age_dist.sdres)
+ 
+ 
+ ggplot(mapping = aes(sample = interested$age)) + stat_qq_point(size = 2)
+```
+
+
+```{r}
+```
+
+Variables: 
+
+- player_url
+- short_name
+- long_name
+- age
+- Date of Birth
+- height_cm
+- weight_kg
+- nationality
+- club
+- overall
+- potential
+- value_eur
+- wage_eur
+- player_positions
+- preferred_foot
+- weak_foot
+- skill_moves
+- work_rate
+- body_type
+- player_traits
+- attacking_crossing
+- attacking_finishing
+- attacking_volleys
+- skill_dribbling
+- skill_curve
+- movement_balance
+- movement_reactions
+- power_jumping
+- power_stamina
+- overall
+
+### Overall assessment
+
+At the moment, I don't have any idea about
+
+- To obtain this file you would need to use the link https://kaggle.com.
+- The variables selected for analysis would give an insight into what contributes to the overall rating a player.
+- Histograms, Scatterplots, Boxplots.
+
+# Analyzing the distribution of the variables selected to check normality assumptions
+```{r}
+# Looking at the distribution of the variables selected
+age_distribution <- football_data$age
+hist(age_distribution)
+
+
+
+```
+
+
