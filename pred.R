@@ -14,10 +14,10 @@ rating <- rating[!apply(rating == "", 1, all), ]
 model <- randomForest(overall ~ ., data = rating, ntree = 1000, mtry = 7, importance = TRUE)
 
 # Save model to RDS file
- saveRDS(model, "model.rds")
+# saveRDS(model, "model.rds")
 
 # Read in the RF model
-model <- readRDS("model.rds")
+#model <- readRDS("model.rds")
 
 ####################################
 # User interface                   #
