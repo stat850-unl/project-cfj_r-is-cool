@@ -23,7 +23,8 @@ player_rate <- na.omit(player_rate)
 ### 1. Which of the six compositions contribute largely to the OVR of the players? 
 
 ```{r}
-
+### this random forest analysis takes not less than 30min to run
+### I have to do this because the rshiny app is not working for a reason I do not know. 
 set.seed(1234)
 ctrl <- trainControl(method = "cv",  number = 10)
 co_split <- initial_split(player_rate, prop = .7)
@@ -78,17 +79,6 @@ vars<- important_variables(measure_importance(rf_model$fit), k = 6)
 
 
 forest <- randomForest::randomForest(overall   ~ ., data = bake(data_prep, new_data = co_train), localImp = TRUE, importance=T, ntree = 100, mtry = 6, type= "regression")
-
-
-
-
-```
-
-```{r}
-#predictions <- predict(bagged_cv, co_test[,2:8])
-#RMSE <- sqrt(sum((predictions - test$)^2)/length(predictions))
-#print(RMSE)
-
 
 ```
 
@@ -295,27 +285,3 @@ autoplot(rate.pca, data = pc_data, colour = "preferred_foot", loadings = T, load
 ```
 
 ## 
-
-```{r}
-#fifa_data <- read.csv("players_20.csv")
-#player_rate1 <- fifa_data %>% select(,5,7,8,11,32:37)
-#player_rate1 <- na.omit(player_rate1)
-
-#Standaedize predictor variables
-#player_rate1 <- player_rate1 %>% mutate_at(c('age', 'height_cm', "weight_kg"), ~(scale(.) %>% as.vector))
-
-
-#models <- list()
-#rvnames <- paste(colnames(player_rate1)[4:10], sep='')
-#pvnames <- paste(colnames(player_rate1)[1:3], sep='') ## for some value of n
-
-#for (y in rvnames){
-#  form <- formula(paste(y, "~", pvnames))
-#  models[[y]] <- glm(form, data=player_rate1, family='gaussian') 
-#}
-
-#lapply(models, summary)$overall
-
-#imp.rf
-
-```
