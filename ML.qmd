@@ -230,7 +230,7 @@ ggbetweenstats(
     plot.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4")
   )
 
-View(paletteer::palettes_d_names)
+#View(paletteer::palettes_d_names)
 ```
 
 ### Just some test analysis- not necessary 
