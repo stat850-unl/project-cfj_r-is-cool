@@ -36,6 +36,71 @@ Here we will use Random Forest, a machine learning technique to evaluate which o
 ### 2. Does the preferred foot, international reputation, weak foot skill, skill moves, and working rate of the players matter when it comes to players performance? 
 We will evaluate this using the ggbetweenstats function from the ggstatsplots (an extension of the ggplot2 package) package in R core team ver 4.1.2. The ggstatsplots package produces an elegant violin and box plot with statistical annotations to explore if there is any significant difference in the contribution of the players preferred foot, international reputation, weak foot skill and skill moves on the overall FIFA ratings of the players. Here, we will make a separate violin-box plot for each of the following explanatory variables (all treated as categorical or factor variables): preferred foot, international reputation, weak foot skill, skill moves, and working rate. The OVR of the players is the response variable.  
 
+## Description of other aspects of the data that I will Explore
+## Data Set
+Provide a link to your dataset here, and a description of the variables in the data set.
+
+https://www.kaggle.com/datasets/thedevastator/fifa-world-cup-anomaly-detection-in-player-ratin?select=players_20.csv
+
+
+Football Data: This data was obtained from https://kaggle.com. It is a website that grants free access to data on vast topics.  The data comprises of several variables that can be used for interesting analysis in FIFA World Cup. The Fifa World Cup is the biggest stage in international football, and the players that take part in it are some of the best in the world. But what goes into making a great World Cup player? Is it the wage of a player? Is it their individual ratings for specific skillsets?  Or something unrelated to the variables considered in this dataset?
+
+This dataset contains information on players overall ratings, as well as their individual ratings for specific skillsets. This data can be used to probe into so many aspects related to the World Cup and its players, including anomaly detection for player ratings.
+
+## Potential Topics to Explore Using the Data Set
+Additional avenues of the data that we will explore are listed below;
+
+1. We will also try and determine variables that contribute to the wage of a player.This will be done by;
+
+- We will look at the distribution of each of the variables to determine whether it satisfies the normality assumption and then make plots that shows the spread of each quantitative variable from its mean.
+
+2. Also, we will look at factors that contributes to a player's attacking finishing. We would want to determine for example whether experienced footballers have an increased attacking finishing skills as compared to unexperienced players. This would be explored using the age variable and other interesting variables.
+
+## How we are going to achieve the above stated goals
+#I began by reading in the dataset which was obtained from kaggle.com
+Some of the variables in the data will not be useful for my analysis.
+Therefore I begin by filtering out variables that are useful for the analysis (Data Cleaning).
+Also, some variables do not contain the right inputs and a few have missing data.
+Therefore, I clean the data so that I'm left with a proper data to make my analysis.
+
+#Exploratory data analysis
+### Correlation between variables
+I try to find the correlation between 
+But before we begin, I try to determine whether data points in each variable follows a normal distribution
+
+##Variables that will be used: 
+
+- player_url
+- short_name
+- long_name
+- age
+- Date of Birth
+- height_cm
+- weight_kg
+- nationality
+- club
+- overall
+- potential
+- value_eur
+- wage_eur
+- player_positions
+- preferred_foot
+- weak_foot
+- skill_moves
+- work_rate
+- body_type
+- player_traits
+- attacking_crossing
+- attacking_finishing
+- attacking_volleys
+- skill_dribbling
+- skill_curve
+- movement_balance
+- movement_reactions
+- power_jumping
+- power_stamina
+- overall
+
 ### References
 1. https://en.wikipedia.org/wiki/Midfielder
 2. https://en.wikipedia.org/wiki/FIFA_World_Cup
@@ -47,3 +112,5 @@ We will evaluate this using the ggbetweenstats function from the ggstatsplots (a
 ## Group Members
 
 John Mensah, Frank Agyemang, Christian Uwineza. 
+
+
