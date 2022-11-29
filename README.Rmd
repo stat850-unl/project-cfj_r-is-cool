@@ -62,9 +62,7 @@ Ideally, this would have been something you provided as part of your data explan
 library(tidyverse)
 library(skimr)
 library(dplyr)
-football_data <- read.csv("players_20.csv")%>%
-  select(age,body_type,wage_eur, potential,player_positions,skill_dribbling, skill_curve, height_cm, overall)
-skim(football_data)
+football_data <- read.csv("players_20.csv")
 
 ```
 
@@ -114,6 +112,77 @@ At the moment, I don't have any idea about
 - To obtain this file you would need to use the link https://kaggle.com.
 - The variables selected for analysis would give an insight into what contributes to the overall rating a player.
 - Histograms, Scatterplots, Boxplots.
+
+## Instructions
+
+Each member of your team should modify this document in some way and push their modifications to the repository in a separate commit. This will ensure that you have set your repository up in a way that ensures all group members are working with the same repository. 
+
+Note that you must compile your readme (this document) for it to properly display as part of your github repository. 
+
+Once you have received feedback on your project proposal (via Canvas) you may alter this README so that it describes your final project instead of the project proposal. 
+
+## Data Set
+Football players rating
+## Group Members
+List all of the project contributors here.
+John Mensah
+Frank Agyemang
+Christian Uwineza
+
+# potential exploration
+
+- Players rating versus players value
+- Top football clubs player's ratings (overall and potential rating)
+- comparison between players 
+- Teams with high economic value
+
+
+# Players rating against platers value
+
+```{r}
+# players with a rating greater than 90
+rating_90<- football_data %>% filter(overall>=90)
+# platers with a rating between 85 and 90
+rating_85_90<- football_data %>% filter(overall>=85 & overall<90)
+
+# value vs rating
+
+ggplot(data = football_data)+
+  geom_line(
+    aes(x= value_eur, y= overall)
+  )
+
+``` 
+
+```{r}
+
+# bar plot comparing the ovall rating of players positions
+ggplot(data = football_data)+
+  geom_bar(
+    aes(x= team_position, y= overall, fill= team_position),
+    stat = "identity",
+    width= 0.5
+  )+
+  theme_bw()
+
+
+```
+
+# Comparison between players within same team (Overall and poetential rating)
+
+```{r}
+football_data %>% 
+  filter(club=="FC Barcelona") %>% 
+  select(short_name, overall, potential) %>% 
+  arrange(-overall) %>% 
+  gather(Variable, Exp, -short_name) %>% 
+  ggplot(aes(short_name, Exp, fill=Variable))+
+  geom_col(position = "dodge")+
+  geom_text(aes(label=Exp), position = position_dodge(width = 0.5), vjust=-0.5)+
+  scale_fill_manual(values = c("#065535","#0000b3"))+
+  theme_bw()
+
+```
 
 
 
