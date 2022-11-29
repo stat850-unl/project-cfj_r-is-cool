@@ -20,7 +20,7 @@ player_rate <- fifa_data %>% select( ,11,32:37)
 player_rate <- na.omit(player_rate)
 ```
 
-### 1. Which of the six compositions contribute largely to the OVR of the players? 
+### 1. Which of the six compositions contribute largely to the OVR of the players?
 
 ```{r}
 ### this random forest analysis takes not less than 30min to run
@@ -60,6 +60,7 @@ imp.rf <- measure_importance(rf_model$fit) %>%
 
 
 plot_min_depth_distribution(md_frame, mean_sample = "top_trees")
+
 imp.rf %>%
   mutate(Variable = factor(variable, levels = reorder(variable, node_purity_increase))) %>%
   ggplot(aes(x = node_purity_increase, y = reorder(variable, +node_purity_increase), fill = variable)) +
@@ -98,7 +99,7 @@ spatialRF::plot_training_df(
 
 ```
 
-## 2. Does the preferred foot of the players matter when it comes to players performance? 
+## 2. Does the preferred foot of the players matter when it comes to players performance?
 
 ```{r}
 library(ggstatsplot)
@@ -127,7 +128,7 @@ PF <- ggbetweenstats(
 
 ```
 
-### 3. Does the international reputation of the players corresponds to the OVR of the players? 
+### 3. Does the international reputation of the players corresponds to the OVR of the players?
 
 ```{r}
 library(PMCMRplus)
@@ -153,7 +154,7 @@ ggbetweenstats(
   )
 ```
 
-### 4. How much effect do the WFS rating have on the players OVR? 
+### 4. How much effect do the WFS rating have on the players OVR?
 
 ```{r}
 library(rstantools)
@@ -180,7 +181,7 @@ ggbetweenstats(
 
 ```
 
-### 5. Does the players SM matter in the OVR of the players? 
+### 5. Does the players SM matter in the OVR of the players?
 
 ```{r}
 ggbetweenstats(
@@ -233,7 +234,7 @@ ggbetweenstats(
 #View(paletteer::palettes_d_names)
 ```
 
-### Just some test analysis- not necessary 
+### Just some test analysis- not necessary
 
 ```{r}
 install.packages("ggfortify")
