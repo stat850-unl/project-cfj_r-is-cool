@@ -21,7 +21,7 @@ fifa_data <- read.csv("players_20.csv")
                                #power = rowMeans(player_rate[, 16:20]),
                                #mentality = rowMeans(player_rate[, 17:26]),
                                #defending = rowMeans(player_rate[, 27:29]))
-player_rate <- fifa_data %>% select(,17,32:37)
+player_ranking <- fifa_data %>% select(,17,32:37)
 
 library(ggplot2)
 #install.packages("ggcorrplot")
@@ -327,4 +327,13 @@ Making a new model
 attacking_finish_model_3  <- lm(stand$attacking_finishing ~ stand$stAge * stand$stWeight_kg, data = stand)
 
 summary(attacking_finish_model_3)
+```
+
+Model Selection
+
+```{r}
+#install.packages("leaps")
+library(leaps)
+best_model <- regsubsets(wage_eur ~ ., football_data_sub, nvmax = 19)
+
 ```
