@@ -12,7 +12,7 @@ There are many football competitions across the world, both at the club level an
 
 The FIFA World Cup is the biggest stage of international football, and the players that take part in it are some of the bests in the world. But how does FIFA rate the players that participate in this championship? For football lovers, the FIFA rating is one of the most anticipated sides of the game. Every football fan wants to know how his/her favorite football player was rated. This, sometimes, results in a lot of criticism and questions on how FIFA's overall ratings are composed. Most importantly what it is composed of, and how much do these compositions each contribute to the overall rating of the players? In general, there are over 35 different statistics that are composed of the FIFA overall rating of players<sup>3</sup>. However, six of them (i.e., speed, shooting, passing, dribbling, defending, and physicality) are notably known as they hold the greatest contributions<sup>3</sup>. The weighting given to these compositions is dependent on the player's team position (i.e., as a midfielder, defender, or forward). Also, the players' international reputation (IR; rated in stars, from one star to five stars) has been noted to add to the overall rating of the players (hereafter, OVR). There is another rating of players known as Weak Foot Skill (WFS) and Skill Moves (SM). Weak Foot Skill measures the ability of a player to shoot with one foot as he does with his preferred foot<sup>4</sup>. All players have a preferred foot (either the left foot or the right foot). Having a 5-star weak foot rating means that a player’s weaker foot shot is identical to their preferred foot shot. Having a 1-star weak foot rating means that the player can only shoot well with one foot<sup>4</sup>. Skill Moves measures the ability of a player to perform technical moves (also rated from one star to 5 stars). Another factor that is most likely to be overlooked is the players' workings rate. The player working rate considers the extent to which a player contributes to running and chasing in a match while not in possession of the ball<sup>5</sup>. This is categorized into attacking working rate (AWR) and defensive working rate (DWR). 
 In this study, we sort to understand the OVR of FIFA World Cup players and its compositions. Specifically, we ask the following questions: 1. which of the six compositions (i.e., speed, shooting, passing, dribbling, defending, and physicality) contributes largely to the OVR of the players? 2. Does the preferred foot, international reputation, weak foot skill, skill moves, and working rate of the players matter when it comes to the player's performance? 
-The questions that are answered in questions (1) and (2) also lead us to pursue other interesting questions about the data such as Factors that contribute to the wage of a player who participated in the world cup. Variables such as Age, Weight, Overall Rating will be in this analysis. Statistical concepts like Multiple Linear Regression and ANOVA will be utilized. Also, we attempt to develop a Shiny App to analyze some section of the data. Another subtle but interesting question that was determined was the probability that a player will be call to the world cup based on Age, Age and attacking_finishing, Age and player position.
+The questions that are answered in questions (1) and (2) also lead us to pursue other interesting questions about the data such as Factors that contribute to the wage of a player who participated in the world cup. Variables such as Age, Weight, Overall Rating will be in this analysis. Statistical concepts like Multiple Linear Regression and ANOVA will be utilized. Also, we attempt to develop a Shiny App to analyze some section of the data. Another subtle but interesting question that was determined was the probability that a player will be call to the world cup based on Age.
 
 ^[ https://en.wikipedia.org/wiki/Midfielder]
 ^[ https://en.wikipedia.org/wiki/FIFA_World_Cup]
@@ -74,6 +74,15 @@ The work rate of the players is very important in a football game. It helps incr
 
 ![](Fig7.png)
 
+The distribution of the age was identified to be normally distributed . This is shown by a histogram plot included in the picture below. Also, correlation pairs are plotted to determine the strength of association between all pairs of variables.
+![](Rplot.png)
+![](Rplot03.png)
+
+
+![](Rplot01.png)
+![](Rplot02.png)
+![](Rplot05.png)
+![](Rplot06.png)
 # 4.0 CONCLUSION
 I am waiting for the result from you guys so I can summarize everything here. 
 
