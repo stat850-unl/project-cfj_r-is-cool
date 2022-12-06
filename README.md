@@ -76,13 +76,21 @@ The work rate of the players is very important in a football game. It helps incr
 
 The distribution of the age was identified to be normally distributed . This is shown by a histogram plot included in the picture below. Also, correlation pairs are plotted to determine the strength of association between all pairs of variables.
 ![](Rplot.png)
+
 ![](Rplot03.png)
 
-
+We also looked at the probability that a player will be called to play in the World cup based on just their age. The dot plots below shows the various probabilities at each age.
 ![](Rplot01.png)
+
+We also looked at the distribution of the wages of players who participated in the World cup and it turns out to be skewed to the right. A histogram of this distribution is attached.
+
+
 ![](Rplot02.png)
+
 ![](Rplot05.png)
+
 ![](Rplot06.png)
+
 # 4.0 CONCLUSION
 I am waiting for the result from you guys so I can summarize everything here. 
 
