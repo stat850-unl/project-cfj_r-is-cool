@@ -184,8 +184,11 @@ The distribution of the age was identified to be normally distributed . This is 
 ![](Rplot05.png)
 ![](Rplot06.png)
 ![](teams'value.png)
+From the graph above, FC Barcelona, Real Madrid, Manchester City, FC Bayern Munchen and Liverpool are the top five expensive teams. The top two teams are from Spain. We also have two teams from England and one team from Germany. 
 ![](Balcelona's rating.png)
+Since we FC Barcelona is the top paying football club, we take a look deeper into their players rating in the graph above. This team has at least 11 players with an overall rating greater than or equal to 85. 
 ![](rating_position.png)
+
 # 4.0 CONCLUSION
 I am waiting for the result from you guys so I can summarize everything here. 
 

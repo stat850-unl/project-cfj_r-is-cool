@@ -165,6 +165,8 @@ ggplot(data = football_data)+
   )+
   theme_bw()+
   ggtitle("Overal rating per players position")
+  ggtitle("Overal rating per players position")+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
 
 ```
