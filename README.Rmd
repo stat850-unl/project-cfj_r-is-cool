@@ -178,11 +178,27 @@ football_data %>%
   gather(Variable, Exp, -short_name) %>% 
   ggplot(aes(short_name, Exp, fill=Variable))+
   geom_col(position = "dodge")+
-  geom_text(aes(label=Exp), position = position_dodge(width = 0.5), vjust=-0.5)+
+  geom_text(aes(label=Exp), position = position_dodge(width = 0.5), vjust=-0.5, size = 2) + xlab("Name of players") + ylab("Rating of players (%)") +
   scale_fill_manual(values = c("#065535","#0000b3"))+
-  theme_bw()
+  theme_bw() + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
 ```
 
-
+```{r}
+football_data %>% 
+  group_by(club) %>% 
+  filter(value_eur>=3.15e+07) %>% 
+  summarise(total_value= sum(as.integer(value_eur), na.rm=TRUE)) %>% 
+  ggplot(aes(reorder(club, total_value), total_value, fill= total_value))+
+  geom_col(show.legend = TRUE)+
+  theme_bw()+
+  coord_flip()+
+  scale_y_continuous(
+    name = "Football clubs values (€)",
+    limits = c(0,700000000),
+    breaks = seq(0,700000000, by= 200000000))+
+  ylab("Football club names")
+  
+ #labels = c("0 €", "1 Billion €","2 Billion €","3 Billion €","4 Billion €","5 Billion €","6 Billion €","7 Billion €","8 Billion €"
+```
 
