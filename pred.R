@@ -11,13 +11,13 @@ rating <- fifa_data %>% select(,11,17,32:37)
 rating <- na.omit(rating)
 rating <- rating[!apply(rating == "", 1, all), ]
 # Build model
-# model <- randomForest(overall ~ ., data = rating, ntree = 500, mtry = 7, importance = TRUE)
+model <- randomForest(overall ~ ., data = rating, ntree = 1000, mtry = 7, importance = TRUE)
 
 # Save model to RDS file
- # saveRDS(model, "model.rds")
+# saveRDS(model, "model.rds")
 
 # Read in the RF model
-model <- readRDS("model.rds")
+#model <- readRDS("model.rds")
 
 ####################################
 # User interface                   #
@@ -97,23 +97,22 @@ server <- function(input, output, session) {
 
 
     Output <- data.frame(Prediction=predict(model,test, type = "response"))
-    print(Output)
     return(Output)
 
   })
 
   output$contents <- renderPrint({
     if (input$submitbutton>0) {
-      "Calculation complete."
+      isolate("Calculation complete.")
     } else {
-      "Server is ready for calculation"
+      return("Server is ready for calculation")
     }
   })
 
   # Prediction results table
   output$tabledata <- renderTable({
     if (input$submitbutton>0) {
-      datasetInput()
+      isolate(datasetInput())
     }
   })
 

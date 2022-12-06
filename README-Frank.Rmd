@@ -39,15 +39,12 @@ This dataset contains information on players overall ratings, as well as their i
 
 
 ## Potential Topics to Explore Using the Data Set
-Additional avenues of the data that we will explore are listed below;
+Describe avenues you might explore using the data
+1. Anomaly detection for player ratings: This is where we try to determine an association between the overall rating of a player (s) and all other quantitative variables. This will be done in a pair-wise manner.
 
-1. We will also try and determine variables that contribute to the wage of a player.This will be done by;
+2. We will look at the distribution of each of the variables to determine whether it satisfies the normality assumption and then make plots that shows the spread of each quantitative variable from its mean.
 
-- We will look at the distribution of each of the variables to determine whether it satisfies the normality assumption and then make plots that shows the spread of each quantitative variable from its mean.
-
-2. Also, we will look at factors that contributes to a player's attacking finishing. We would want to determine for example whether experienced footballers have an increased attacking finishing skills as compared to unexperienced players. This would be explored using the age variable and other interesting variables.
-
-
+3. We also consider the overall player rating and regress it on some variables of interest.
 
 
 ## Group Members
@@ -96,7 +93,7 @@ library(qqplotr)
 # age_dist = lm(interested$overall ~ interested$age, data=interested) 
 #  age_dist.sdres = rstandard(age_dist)
 age <- rnorm(interested$age,25.3, 4.66)
-ggplot(mapping = aes(sample = interested$age)) + stat_qq_point(size =100)
+ggplot(mapping = aes(sample = interested$age)) + stat_qq_point(size =100 )
 ```
 
 
