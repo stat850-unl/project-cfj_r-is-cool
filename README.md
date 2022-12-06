@@ -183,6 +183,9 @@ The distribution of the age was identified to be normally distributed . This is 
 ![](Rplot02.png)
 ![](Rplot05.png)
 ![](Rplot06.png)
+![](teams'value.png)
+![](Balcelona's rating.png)
+![](rating_position.png)
 # 4.0 CONCLUSION
 I am waiting for the result from you guys so I can summarize everything here. 
 
