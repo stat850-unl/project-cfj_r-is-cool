@@ -97,7 +97,8 @@ rating_85_90<- football_data %>% filter(overall>=85 & overall<90)
 ggplot(data = football_data)+
   geom_line(
     aes(x= value_eur, y= overall)
-  )
+  )+
+xlab("Players' value (€)")
 
 ``` 
 
