@@ -163,7 +163,14 @@ ggplot(data = football_data)+
     stat = "identity",
     width= 0.5
   )+
+<<<<<<< HEAD
   theme_bw()
+=======
+  theme_bw()+
+  ggtitle("Overal rating per players position")
+  ggtitle("Overal rating per players position")+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+>>>>>>> bbdd983a0f03446b4fef844f4a616014faa183c3
 
 
 ```
