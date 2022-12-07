@@ -1,0 +1,172 @@
+---
+title: "Stat 850 Project Description"
+author: "Christian Uwineza"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+options(digits = 3)
+```
+
+
+## Instructions
+
+Each member of your team should modify this document in some way and push their modifications to the repository in a separate commit. This will ensure that you have set your repository up in a way that ensures all group members are working with the same repository. 
+
+Note that you must compile your readme (this document) for it to properly display as part of your github repository. 
+
+Once you have received feedback on your project proposal (via Canvas) you may alter this README so that it describes your final project instead of the project proposal. 
+
+## Data Set
+Provide a link to your dataset here, and a description of the variables in the data set.
+
+https://www.kaggle.com/datasets/thedevastator/fifa-world-cup-anomaly-detection-in-player-ratin?select=players_20.csv
+
+
+## Potential Topics to Explore Using the Data Set
+- Players rating versus players value
+- Top football clubs player's ratings (overall and potential rating)
+- comparison between players 
+- Teams with high economic value
+
+## Group Members
+List all of the project contributors here.
+John Mensah
+Frank Agyemang
+Christian Uwineza
+
+
+## Dr. Vanderplas' Exploration of the Data
+
+Ideally, this would have been something you provided as part of your data explanations :).
+
+```{r, message = F, warning = F}
+library(tidyverse)
+library(skimr)
+library(dplyr)
+football_data <- read.csv("players_20.csv")
+
+```
+
+
+Variables: 
+
+- player_url
+- short_name
+- long_name
+- age
+- Date of Birth
+- height_cm
+- weight_kg
+- nationality
+- club
+- overall
+- potential
+- value_eur
+- wage_eur
+- player_positions
+- preferred_foot
+- weak_foot
+- skill_moves
+- work_rate
+- body_type
+- player_traits
+- attacking_crossing
+- attacking_finishing
+- attacking_volleys
+- skill_dribbling
+- skill_curve
+- movement_balance
+- movement_reactions
+- power_jumping
+- power_stamina
+- overall
+
+
+# Players rating against platers value
+
+```{r}
+# players with a rating greater than 90
+rating_90<- football_data %>% filter(overall>=90)
+# platers with a rating between 85 and 90
+rating_85_90<- football_data %>% filter(overall>=85 & overall<90)
+
+# value vs rating
+
+ggplot(data = football_data)+
+  geom_line(
+    aes(x= value_eur, y= overall)
+  )
+
+``` 
+
+```{r}
+
+# bar plot comparing the ovall rating of players positions
+ggplot(data = football_data)+
+  geom_bar(
+    aes(x= team_position, y= overall, fill= team_position),
+    stat = "identity",
+    width= 0.5
+  )+
+  theme_bw()+
+  ggtitle("Overal rating per players position")+
+  xlab("Team position")+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+   scale_y_continuous(
+    name = "Rating (%)",
+    limits = c(0,100),
+    breaks = seq(0,100, by= 10))
+ggsave(path = "/Users/cb/Desktop/project-cfj_r-is-cool", file = "rating_position.jpeg", width = 12, height =8, dpi=700)
+
+
+```
+
+# Comparison between players within same team (Overall and poetential rating)
+
+```{r}
+football_data %>% 
+  filter(club=="FC Barcelona") %>% 
+  select(short_name, overall, potential) %>% 
+  arrange(-overall) %>% 
+  gather(Variable, Exp, -short_name) %>% 
+  ggplot(aes(short_name, Exp, fill=Variable))+
+  geom_col(position = "dodge")+
+  geom_text(aes(label=Exp), position = position_dodge(width = 0.7), vjust=-0.5, size = 2.5) + xlab("Name of players") + ylab("Rating of players (%)") +
+  scale_fill_manual(values = c("#065535","#0000b3"))+
+  theme_bw() + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  ggtitle("FC Balcelona's players rating")+
+    theme(axis.text=element_text(size=12),
+        axis.title=element_text(size=15,face="bold"))+
+  theme(legend.text = element_text(size = 15)) +
+  theme(plot.title = element_text(size = 20, face = "bold")) +
+  theme(text = element_text(size = 17))  
+
+ggsave(path = "/Users/cb/Desktop/project-cfj_r-is-cool", file = "Barcelona's_rating.jpeg", width = 16, height =8, dpi=700)
+
+
+```
+
+```{r}
+football_data %>% 
+  group_by(club) %>% 
+  filter(value_eur>=3.15e+07) %>% 
+  summarise(total_value= sum(as.integer(value_eur), na.rm=TRUE)) %>% 
+  ggplot(aes(reorder(club, total_value), total_value, fill= total_value))+
+  geom_col(show.legend = TRUE)+
+  theme_bw()+
+  coord_flip()+
+  scale_y_continuous(
+    name = "Football clubs values (€)",
+    limits = c(0,700000000),
+    breaks = seq(0,700000000, by= 200000000))+
+  theme(axis.title.y = element_blank())+
+  ggtitle("Most expensive football clubs")
+
+ggsave(path = "/Users/cb/Desktop/project-cfj_r-is-cool", file = "Expensive_teams.jpeg", width = 12, height =8, dpi=700)
+
+  
+ #labels = c("0 €", "1 Billion €","2 Billion €","3 Billion €","4 Billion €","5 Billion €","6 Billion €","7 Billion €","8 Billion €"
+```
+
