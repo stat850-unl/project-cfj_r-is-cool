@@ -1,0 +1,294 @@
+---
+title: "Evaluating factors that contribute to the overall rating of FIFA World Cup players"
+Presented by: "John Mensah, Frank Agyemang, Christian Uwineza"
+institute: "University of Nebraska-Lincoln"
+date: "December 5th, 2022"
+format: revealjs
+editor: visual
+---
+
+## Outline
+
+-   Introduction
+-   Methodology
+-   Results
+-   Conclusion
+
+## Introduction
+
+![](soccer.positions.jpeg)
+
+image source: pinterest.com
+
+## Introduction Cont'd
+
+[![Qatar 2022 FIFA World Cup Bracket. Image source: vecteezy.com](2022FWC-bracket.webp)](image source: vecteezy.com)
+
+## Introduction - Purpose of study
+
+![Fig. 1 A sample of the FIFA Ultimate Team (FUT) card of United State Men's National Team player, Christian Pulisic (a.k.a Captain America). The information on the FUT card shows that Pulisic has an OVR of 87 and plays a position as a left winger (LW). The FUT card also shows the six main statistics of the American footballer: PAC = the player's pace score, SHO = the player's Shooting power score, PAS = player's passing accuracy score, DRI = the player's dribbling skill rate, PHY = player's physicality, DEF = players defensive skill score](Pulisic.png){fig-align="center" width="380"}
+
+## Introduction - why overall rating?
+
+-   It determines the market value of the players.
+
+-   It determines the wage of the players.
+
+-   It influences the contract and market demand of a player.
+
+## Topics explored
+
+1.  What factors contribute to the greatest proportion of the overall rating of the players?
+
+2.  How does the players' overall rating differ in relationship to their
+
+    -   international reputation
+
+    -   weak foot skill
+
+    -   skill moves
+
+    -   working rate
+
+    -   preferred foot
+
+## Methods - Data download load site
+
+[![Data downlaod site for FIFA World Cup Players via https://www.kaggle.com/datasets/thedevastator/fifa-world-cup-anomaly-detection-in-player-ratin](data_download-site.png){fig-align="left"}](https://www.kaggle.com/datasets/thedevastator/fifa-world-cup-anomaly-detection-in-player-ratin)
+
+## Methods - Data description 
+
+-    This data set contains detailed information related to the FIFA World Cup players, including information on players' overall ratings, as well as their individual ratings for specific skill sets.
+
+-   The data is made up of 18278 observations and 104 variables.
+
+## Methods - Data description Cont'd
+
+For the purpose of this project, we will only focus on the following variables:
+
+-   overall (response variable) - The player's overall rating given on a percentage scale
+-   Explanatory variables - speed/pace, shooting, passing, dribbling, defending and physicality
+-    preferred foot - The player's preferred foot (either left foot or right foot)
+-    international reputation - how known/long they have played for their country (scale: 1-5)
+
+## Methods - Data description Cont'd
+
+-   skill moves - ability of a player to perform technical moves (scale: 1-5)
+-   working rate - this variable measures the working rate of the player on low, medium, and high scale. It is also measured based on attacking working rate vs defensive working rate, making a total of ninefactor levels (e.g., high/low = "high" attacking working rate and "low" defensive working rate)
+-   weak foot skill - ability of a football player to equally use the weak foot as the preferred foot (scale: 1-5)
+
+## Methods - Analysis (Topic 1)
+
+-   We used random forest regression to determine the variable importance for explaining the overall rating of the FIFA World Cup players based on the player's speed, shooting, passing, dribbling, defending, and physicality (Breiman et al. 2001).
+
+-   This will be visualized based on the node of purity, which measures the overall contribution of the component factors. The higher the node of purity, the greater the contribution.
+
+-   In this study, the Random Forest model was built using the Random Forest package ver 4.7 available in R 4.1.2 (R Development Core Team 2022).
+
+## Methods - Analysis (Topic 2)
+
+-   We will evaluate this using the ggbetweenstats function from the ggstatsplots (an extension of the ggplot2 package) package in R core team ver 4.1.2.
+
+-   The ggstatsplots package produces an elegant violin-box plot with statistical annotations to explore if there is any significant difference in the overall rating of the players' in terms of their preferred foot, international reputation, weak foot skill and skill moves on the overall FIFA ratings of the players.
+
+## Result 
+
+1.  Factors that contribute to the greatest proportion of the overall rating of the players
+
+![The random forest model revealed that, the six main factors considered in the overall rating of the players explains a total variation of 96.4% in the players' overall rating.](rfplot.png){fig-align="left" width="502"}
+
+## Result - Preferred foot vs overall rating
+
+```{r, eval = T, echo = F, fig.width = 6, fig.height = 4,message=FALSE, warning=FALSE}
+library(ggstatsplot)
+library(tidyverse)
+fifa_data <- read.csv("players_20.csv")
+
+PF <- ggbetweenstats(
+  data = fifa_data,
+  x = preferred_foot,
+  y = overall,
+  pairwise.comparisons = F,
+  bf.message = TRUE
+) + labs(
+    x = "Preferred foot",
+    y = "Overall rating"
+  ) +
+  theme(
+    axis.ticks = element_blank(),
+    axis.line = element_line(colour = "grey50"),
+    panel.grid = element_line(color = "#b4aea9"),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.major.y = element_line(linetype = "dashed"),
+    panel.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4"),
+    plot.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4")
+  ) + labs(caption = 
+"Fig.3. Preferred foot and the overall rating of the FIFA World Cup players") +
+  theme(plot.caption = element_text(hjust=0))
+
+PF
+```
+
+## Result - International reputation vs overall rating
+
+```{r, eval = T, echo = F, fig.width = 6, fig.height = 4,message=FALSE, warning=FALSE}
+
+library(PMCMRplus)
+ggbetweenstats(
+  data = fifa_data,
+  x = international_reputation,
+  y = overall,
+  pairwise.comparisons = F,
+  bf.message = TRUE
+) + labs(
+    x = "International reputation (Star)",
+    y = "Overall rating"
+  ) +
+  theme(
+    axis.ticks = element_blank(),
+    axis.line = element_line(colour = "grey50"),
+    panel.grid = element_line(color = "#b4aea9"),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.major.y = element_line(linetype = "dashed"),
+    panel.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4"),
+    plot.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4")
+  ) + labs(caption = 
+"Fig.4 International reputation rating and the overall rating of the FIFA World Cup players") +
+  theme(plot.caption = element_text(hjust=0))
+
+```
+
+## Result - Weak foot skill vs overall rating
+
+```{r, eval = T, echo = F, fig.width = 6, fig.height = 4,message=FALSE, warning=FALSE}
+
+library(rstantools)
+ggbetweenstats(
+  data = fifa_data,
+  x = weak_foot,
+  y = overall,
+  pairwise.comparisons = F,
+  bf.message = F
+) + labs(
+    x = "Weak foot skill (star)",
+    y = "Overall rating"
+  ) +
+  theme(
+    axis.ticks = element_blank(),
+    axis.line = element_line(colour = "grey50"),
+    panel.grid = element_line(color = "#b4aea9"),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.major.y = element_line(linetype = "dashed"),
+    panel.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4"), plot.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4")
+  ) + labs(caption = 
+"Fig.5. Weak foot skill rating and the overall rating of the FIFA World Cup players") +
+  theme(plot.caption = element_text(hjust=0))
+```
+
+## Result - Skill moves vs overall rating
+
+```{r, eval = T, echo = F, fig.width = 6, fig.height = 4,message=FALSE, warning=FALSE}
+
+ggbetweenstats(
+  data = fifa_data,
+  x = skill_moves,
+  y = overall,
+  pairwise.comparisons = F,
+  bf.message = TRUE
+) + labs(
+    x = "Skill moves (star)",
+    y = "Overall rating"
+  ) +
+  theme(
+    axis.ticks = element_blank(),
+    axis.line = element_line(colour = "grey50"),
+    panel.grid = element_line(color = "#b4aea9"),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.major.y = element_line(linetype = "dashed"),
+    panel.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4"),
+    plot.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4")
+  ) + labs(caption = 
+"Fig.6. Skill move rating and the overall rating of the FIFA World Cup players") +
+  theme(plot.caption = element_text(hjust=0))
+```
+
+## Result - Working rate vs overall rating
+
+```{r, eval = T, echo = F, fig.width = 6, fig.height = 4,message=FALSE, warning=FALSE}
+
+replace <- function(x){
+  y <- x
+  for(i in 1:length(x)){
+    if(x[i] == "High/High"){
+      y[i] <- "H/H"
+    } else if(x[i] == "High/Medium"){
+      y[i] <- "H/M"
+    }else if(x[i] == "High/Low"){
+      y[i] <- "H/L"
+    } else if(x[i] == "Medium/Medium"){
+      y[i] <- "M/M"
+    }else if(x[i] == "Medium/Low"){
+      y[i] <- "M/L"
+    }else if(x[i] == "Medium/High"){
+      y[i] <- "M/H"
+    }else if(x[i] == "Low/Low"){
+      y[i] <- "L/L"
+    }else if(x[i] == "Low/Medium"){
+      y[i] <- "L/M"
+    }else if(x[i] == "Low/High"){
+      y[i] <- "L/H"
+    }else {
+      y[i] <- x[i]
+    }
+      
+  } 
+  return(y)
+}
+
+fifa_data$work_rate <- replace(fifa_data$work_rate)
+
+ggbetweenstats(
+  data = fifa_data,
+  x = work_rate,
+  y = overall,
+  pairwise.comparisons = F,
+  palette = "Spectral",
+  bf.message = F
+) + labs(
+    x = "Working rate",
+    y = "Overall rating"
+  ) +
+  theme(
+    axis.ticks = element_blank(),
+    axis.line = element_line(colour = "grey50"),
+    panel.grid = element_line(color = "#b4aea9"),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.major.y = element_line(linetype = "dashed"),
+    panel.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4"),
+    plot.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4")
+  ) + theme(
+  plot.caption = element_text(hjust = 0)
+  ) + labs(caption = "Fig. 7. Differences in overall rating among the nine different categories of working rate 
+of the FIFA World Cup players. H = High, M = Medium, L = Low. The rating
+was done by comparing the offensive working rate to the defensive working rate of the players") +
+  theme(plot.caption = element_text(hjust=0))
+```
+
+## Conclusion 
+
+1.  Players with high dibbling and defending rate are more likely to possess higher overall rating.
+
+2.  Left foot players have higher overall rating compared right footed players.
+
+3.  The higher the players international reputation, the higher the overall rating.
+
+## Conclusion cont'd
+
+4.  The ability of the player to use both foot equally result in higher overall rating.
+5.  More skillful players are highly rated than less skilled players.
+6.  Players that invest highly in either attacking or defending working rate have higher overall rating than players that invest moderately in attacking and defending working rate.
