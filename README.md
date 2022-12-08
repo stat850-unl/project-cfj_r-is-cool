@@ -355,6 +355,9 @@ We performed a multiple linear regression to determine factors that contribute t
 ### 2.2.4 What is the probability that a player would be called for the World Cup based on his age?
 We looked at the chances of a player being called up for the world cup, first, based on his age alone and the combination of age and other variables. We made a data frame containing the variable Age and calculated the frequency for the various ages. The probablity was determined using the frequentist approach to calculating probability.
 
+### 2.2.5 Teams paying their players more than others. 
+We took a closer look at the players salary and grouped all players from the same team together then added all their salaries together to come up with a sum of the totals teams are paying their players. We used the geom_col inside the gglot2 to make a nice graph with the top teams paying a lot to their players. 
+
 # 3.0 RESULT and DISCUSION
 ## 3.1 The main compositions contribute disproportionately to the OVR of the players
 >>>>>>> 4fec1271d43bbbb238022dbf40b323929fc269ee
@@ -408,20 +411,14 @@ contributors here. John Mensah Frank Agyemang Christian Uwineza
 ![](Rplot6.png)
 <<<<<<< HEAD
 =======
-![](teams'value.png)
+![](Expensive_teams.jpeg)
 From the graph above, FC Barcelona, Real Madrid, Manchester City, FC Bayern Munchen and Liverpool are the top five expensive teams. The top two teams are from Spain. We also have two teams from England and one team from Germany. 
-![](Balcelona's rating.png)
-Since we FC Barcelona is the top paying football club, we take a look deeper into their players rating in the graph above. This team has at least 11 players with an overall rating greater than or equal to 85. 
-![](rating_position.png)
+![](Barcelona's_rating.jpeg)
+Since FC Barcelona is the top paying football club, we take a look deep into their players rating in the graph above. This team has at least 11 players with an overall rating greater than or equal to 85. 
+
 >>>>>>> bbdd983a0f03446b4fef844f4a616014faa183c3
 >>>>>>> 4fec1271d43bbbb238022dbf40b323929fc269ee
 
-# potential exploration
-
-- Players rating versus players value
-- Top football clubs player’s ratings (overall and potential rating)
-- comparison between players
-- Teams with high economic value
 
 <<<<<<< HEAD
 # Players rating against platers value

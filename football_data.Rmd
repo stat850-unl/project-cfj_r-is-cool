@@ -1,0 +1,193 @@
+---
+title: "football_data"
+author: "Frank Agyemang"
+date: "2022-11-27"
+output: html_document
+---
+
+Loading libraries
+```{r}
+library(datasets)
+library(tidyr)
+library(ggplot2)
+library(skimr)
+library(dplyr)
+library(plyr)
+library(linearModel)
+library(GGally)
+library(corrplot)
+library(ggpubr)
+library(broom)
+#library(tidyverse)
+library(cowplot)
+library(car)
+
+```
+
+#Reading in the dataset
+```{r}
+football_data <- read.csv("players_20.csv")
+skim(football_data)
+```
+
+#The skim function in R gives a summary of the data. The difference between the skim function and summary stems from the fact that the skim
+#function provides more details about the data than the summary function.
+#Looking at the output from the skim function tells me whether I may need to do some data clearing with some of the variables of interest.
+# Note that it groups the variables by data type and that is helpful with the type of analysis we make.
+```{r}
+summary(football_data)
+```
+
+```{r}
+football_data_sub <- football_data %>%
+  select(short_name,age,height_cm, weight_kg,overall, wage_eur,player_positions,attacking_crossing,attacking_heading_accuracy,attacking_short_passing,attacking_volleys,attacking_finishing)
+
+```
+
+# Analyzing the distribution of the variables selected
+```{r}
+ggplot(football_data_sub, aes(age)) + 
+  geom_bar(fill = "yellow" , color = "black")+
+  scale_x_binned()
+```
+
+
+# From the plot it can be observed that majority of the players are around the age 24years.
+# We could use this information to determine the probability of a player been called to the world given his age.
+
+```{r}
+age_frequency <- count(football_data_sub, "age") %>%
+  mutate(probability = age_frequency$freq/length(football_data_sub$age))
+age_frequency
+
+par(mar = c(1, 1, 1,1))
+plot(age_frequency$age,age_frequency$probability, col = "black", xlab = "age",ylab = "prob")
+
+```
+
+# #Analyzing the distribution of the height variable
+# ggplot(football_data_sub, aes(height_cm,fill=height_cm)) +
+#   geom_bar()+
+#   scale_fill_gradient2(low = "red",high = "yellow",mid = "green")
+
+
+# Checking whether there are relationship between pairs of variables
+#height and weight
+
+```{r}
+par(mar = c(1, 1, 1,1))
+norm_height <- log(football_data_sub$height_cm)
+norm_weight <- log(football_data_sub$weight_kg)
+plot(norm_height,norm_weight, col="blue")
+abline(lm(norm_weight~norm_height))
+correlation <- cor(norm_height,norm_weight)
+```
+
+#exploratory analysis of wage_eur
+
+```{r}
+min(football_data_sub$wage_eur)
+max(football_data_sub$wage_eur)
+wage <- football_data_sub$wage_eur
+wage <- wage[wage > 0]
+wage
+min(wage)
+max(wage)
+var(wage)
+sd(wage)
+mean(wage)
+
+football_data_sub1 <- subset(football_data_sub, select = -c(short_name,player_positions))
+pairs(football_data_sub1, pch = 18, col = "black")
+hist(wage,
+     col="grey",
+     border="black",
+     prob = TRUE)
+
+lines(density(wage,adjust = 2),
+      lwd = 1,
+      col = "black")
+
+```
+
+#The density plot shows that the wage of players may be skewed.
+
+```{r, warning=FALSE}
+football_data_sub %>% 
+  select(age:wage_eur,attacking_crossing:attacking_finishing) %>% 
+  ggpairs()
+```
+
+
+#Does a player's Age and Weight affect a player's attacking finishing
+
+```{r}
+attacker_finish <- football_data_sub%>%
+  select(age,weight_kg,attacking_finishing)
+
+```
+
+
+#corelation plots
+
+```{r}
+plot(attacker_finish$age, attacker_finish$attacking_finishing, pch = 19, col = "blue")
+
+abline(lm(attacker_finish$attacking_finishing ~ attacker_finish$age), col = "black", lwd = 3)
+cor(attacker_finish$age, attacker_finish$attacking_finishing)
+```
+
+# The plot and correlation coefficient shows that age has a positive correlation with attackers 
+#finishing
+# This is plausible because older players in soccer tend to have more experience 
+# and thus have better finishing that young footballers.
+
+```{r}
+plot(attacker_finish$weight_kg, attacker_finish$attacking_finishing, pch = 19, col = "blue")
+abline(lm(attacker_finish$attacking_finishing ~ attacker_finish$weight_kg), col = "black", lwd = 3)
+cor(attacker_finish$weight_kg, attacker_finish$attacking_finishing)
+```
+
+#The second correlation plots also shows that weight has a negative correlation with an 
+# attackers finishing .
+#This is also plausible because players who weigh more are not able to run faster and
+# hence are not better attackers. The heavier a player becomes to more negative it affects his finishing.
+
+
+```{r}
+attacking_finish_model_1<-lm(attacker_finish$attacking_finishing ~ attacker_finish$age + attacker_finish$weight_kg, data = attacker_finish)
+```
+
+Checking for interaction using *
+
+```{r}
+attacking_finish_model_2<-lm(attacker_finish$attacking_finishing ~ attacker_finish$age * attacker_finish$weight_kg, data = attacker_finish)
+
+summary(attacking_finish_model_2)
+```
+
+Now lets's check for collinearity using vif()
+
+The values in our result is greater than 5. Therefore there is a problem. We have to center and redo the model.
+
+```{r}
+vif(attacking_finish_model_2)
+```
+
+Redoing the model
+Standardize the data
+
+```{r}
+stand <- attacker_finish %>% 
+  mutate(stAge=age - mean(age)) %>% 
+  mutate(stWeight_kg=weight_kg-mean(weight_kg))
+```
+Making a new model
+
+```{r}
+attacking_finish_model_3  <- lm(stand$attacking_finishing ~ stand$stAge * stand$stWeight_kg, data = stand)
+
+summary(attacking_finish_model_3)
+```
+
+

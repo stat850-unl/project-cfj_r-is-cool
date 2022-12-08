@@ -20,7 +20,7 @@ player_rate <- fifa_data %>% select( ,11,32:37)
 player_rate <- na.omit(player_rate)
 ```
 
-### 1. Which of the six compositions contribute largely to the OVR of the players? 
+### 1. Which of the six compositions contribute largely to the OVR of the players?
 
 ```{r}
 ### this random forest analysis takes not less than 30min to run
@@ -60,6 +60,7 @@ imp.rf <- measure_importance(rf_model$fit) %>%
 
 
 plot_min_depth_distribution(md_frame, mean_sample = "top_trees")
+
 imp.rf %>%
   mutate(Variable = factor(variable, levels = reorder(variable, node_purity_increase))) %>%
   ggplot(aes(x = node_purity_increase, y = reorder(variable, +node_purity_increase), fill = variable)) +
@@ -71,7 +72,11 @@ imp.rf %>%
                                    face = "bold")
   ) +
   scale_y_discrete("") +
-  scale_x_continuous("Inc Node Purity")
+  scale_x_continuous("Inc Node Purity") + labs(caption = 
+"Fig.2. Random forest analysis of the six main statistics that 
+composite the overall rating of the FIFA World Cup players. 
+physic = physicality of the players") +
+  theme(plot.caption = element_text(hjust=0))
 
 #Identifying potential interactions
 vars<- important_variables(measure_importance(rf_model$fit), k = 6)
@@ -81,6 +86,34 @@ vars<- important_variables(measure_importance(rf_model$fit), k = 6)
 forest <- randomForest::randomForest(overall   ~ ., data = bake(data_prep, new_data = co_train), localImp = TRUE, importance=T, ntree = 100, mtry = 6, type= "regression")
 
 ```
+
+```{r}
+players_rate <- fifa_data %>% select( ,32:37)
+library(ggplot2)
+#install.packages("ggcorrplot")
+library(ggcorrplot)
+
+  
+# Computing correlation matrix
+player_rate <- na.omit(player_rate)
+correlation_matrix <- round(cor(player_rate),3)
+
+  
+# Computing correlation matrix with p-values
+corrp.mat <- cor_pmat(player_rate)
+  
+# Adding correlation significance level
+ggcorrplot(correlation_matrix, hc.order =TRUE, type ="lower", 
+           p.mat = corrp.mat, lab = T) + theme_classic() + ylab("") + xlab("")
+```
+
+### Interpretation
+
+Rating of football players is one of the most anticipated exercise in the game of association football. The players, fans, investors, and any other person involved in the game look forward to the overall rating of the players. This is very important because it tells the overall performance of the player for the season under review, and also influences the price, contract and market demand of a player. Six main factors composite the overall rating of the football players, but whether these factors differ in their overall contribution and how much they differ is not known. Also, how much variation in the overall rating is explained by these factors is quite not clear even though it has been noted that the greatest proportion of the overall rating is dependent on six main factors: speed, shooting, passing, dribbling, defending and physicality of the players.
+
+In order to evaluate the total variation and individual contribution of these six main factors to the overall rating of the FIFA World Cup players, we fitted a Random Forest model to the data. The random forest model revealed that, the six main factors considered in the overall rating of the players explains a total variation of 96.4% in the players' overall rating. This is much expected because the six factors considered are the main factors found on the FIFA Ultimate Team (FUT) card (Fig. 1).The FUT card contains information (including the player's name, photo, nation's flag, name, and club's badge) and statistics (the players rating on pace, shooting, dribbling, defense, passing, and physicality) of a real life footballer and is categorised based on the player's type and quality. These is statistics is commonly known to many as the only determinant of the players' OVR, but it is not always the case. In some cases, it has been noted that the players international reputation can influence the OVR by adding onto it\^3.
+
+Figure 2 measure the contribution of each of the six statistics on the FUT card on the players' OVR. We determined this based on the nodes of purity of a fitted regression trees. The concept of the node of purity in the regression tree is such that, the fitted model is a one big bushy forest (here a forest of 500 trees) and the various explanatory variables are factors that sustain the forest. Now, the forest is trimmed down by removing these explanatory variables that sustain the forest, and it done in a such a way that if one variable is removed how much of the forest would be reduced. The variable that will lead to the highest effect on the forest is classified as the one with the most increased node of purity (in other words, the most important variable). In fig 2, the dribbling skills of the players holds the highest node of purity, followed by defending skills and the passing skills, respectively. While the players pace was the least. The result in fig 2 reveal that the six statistics on the FUT card contribute differently in terms of their proportions to the OVR of the players and thus, the ability of a player to dribble or defend increases the chance of having a higher OVR. In other words, players with high dribbling or defending skills are more likely to have higher OVR compared to players with high pace or physicality.
 
 *Blas M. Benito (2021). spatialRF: Easy Spatial Regression with Random Forest. R package version 1.1.0. doi: 10.5281/zenodo.4745208. url: <https://blasbenito.github.io/spatialRF/>*
 
@@ -98,7 +131,7 @@ spatialRF::plot_training_df(
 
 ```
 
-## 2. Does the preferred foot of the players matter when it comes to players performance? 
+## 2. Does the preferred foot of the players matter when it comes to players performance?
 
 ```{r}
 library(ggstatsplot)
@@ -109,6 +142,7 @@ PF <- ggbetweenstats(
   data = fifa_data,
   x = preferred_foot,
   y = overall,
+  pairwise.comparisons = F,
   bf.message = TRUE
 ) + labs(
     x = "Preferred foot",
@@ -123,11 +157,18 @@ PF <- ggbetweenstats(
     panel.grid.major.y = element_line(linetype = "dashed"),
     panel.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4"),
     plot.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4")
-  )
+  ) + labs(caption = 
+"Fig.3. Preferred foot and the overall rating of the FIFA World Cup players") +
+  theme(plot.caption = element_text(hjust=0))
 
+PF
 ```
 
-### 3. Does the international reputation of the players corresponds to the OVR of the players? 
+There has been a generational debate about left and right footed footballers, which of them are most talented or play very well. Generally, we do not observe as many left footed footballers as right footed footballers but the few left footed players are usually known to be very good. In fig 3, we compared the overall rating of the left and right preferred foot of the players to see which of them has the highest OVR and if the difference is significant. In total, there were 4318 left footed players and 13960 right footed players. We found that, the left footed payers have significantly higher OVR (mean = 66.88) than the right footed players (mean = 66.11) (Fig 3).
+
+!\[\](fig3.png)
+
+### 3. Does the international reputation of the players corresponds to the OVR of the players?
 
 ```{r}
 library(PMCMRplus)
@@ -150,10 +191,14 @@ ggbetweenstats(
     panel.grid.major.y = element_line(linetype = "dashed"),
     panel.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4"),
     plot.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4")
-  )
+  ) + labs(caption = 
+"Fig.4 International reputation rating and the overall rating of the FIFA World Cup players") +
+  theme(plot.caption = element_text(hjust=0))
 ```
 
-### 4. How much effect do the WFS rating have on the players OVR? 
+The international reputation of the players is rated on the basis of how known/long they have played for their country. The is very important rating as it help boost the OVR of the players. In Fig 4, we found that higher international reputation significantly increases the players OVR. Playing at the national teams comes with a lot of sacrifices, and many players goes to the extent to switch nationality in order to earn a call up to play at the international football competitions. Our result explains why many players are willing to make so many sacrifices with hard work in order to play for their countries. International reputation help improves not only the players OVR but also the player market demand and wages.
+
+### 4. How much effect do the WFS rating have on the players OVR?
 
 ```{r}
 library(rstantools)
@@ -162,7 +207,7 @@ ggbetweenstats(
   x = weak_foot,
   y = overall,
   pairwise.comparisons = F,
-  bf.message = TRUE
+  bf.message = F
 ) + labs(
     x = "Weak foot Skill (star)",
     y = "Overall rating"
@@ -174,13 +219,16 @@ ggbetweenstats(
     panel.grid.minor = element_blank(),
     panel.grid.major.x = element_blank(),
     panel.grid.major.y = element_line(linetype = "dashed"),
-    panel.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4"),
-    plot.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4")
-  )
+    panel.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4"), plot.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4")
+  ) + labs(caption = 
+"Fig.5. Weak foot skill rating and the overall rating of the FIFA World Cup players") +
+  theme(plot.caption = element_text(hjust=0))
 
 ```
 
-### 5. Does the players SM matter in the OVR of the players? 
+The ability of a football player to equally use the weak as the preferred foot is also very important determinant of players rating. In Fig 5, we found that players that are able to use both their preferred and weak foot equally have higher rating compared to those with less ability to use both foot equally. Being able to use both foot is an important skill to possess as a football player because it makes one unpredictable by the opponent and stand a very high chance of winning possession of the ball. Such players are also very versatile in the field and are able to play in positions that might require only left or right footed players.
+
+### 5. Does the players SM matter in the OVR of the players?
 
 ```{r}
 ggbetweenstats(
@@ -202,12 +250,48 @@ ggbetweenstats(
     panel.grid.major.y = element_line(linetype = "dashed"),
     panel.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4"),
     plot.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4")
-  )
+  ) + labs(caption = 
+"Fig.6. Skill move rating and the overall rating of the FIFA World Cup players") +
+  theme(plot.caption = element_text(hjust=0))
 ```
+
+Skill moves are also very important in the game pf association football. Players with low skill moves are most likely to loose possession of the ball or have less dribbling efficiency. Fig 6 also showed that higher skill moves significantly increases the players OVR.
 
 ### 6. How does the combination of the players working rating (i.e., attacking working rate/defensive working rate) contribute to the OVR?
 
 ```{r}
+
+replace <- function(x){
+  y <- x
+  for(i in 1:length(x)){
+    if(x[i] == "High/High"){
+      y[i] <- "H/H"
+    } else if(x[i] == "High/Medium"){
+      y[i] <- "H/M"
+    }else if(x[i] == "High/Low"){
+      y[i] <- "H/L"
+    } else if(x[i] == "Medium/Medium"){
+      y[i] <- "M/M"
+    }else if(x[i] == "Medium/Low"){
+      y[i] <- "M/L"
+    }else if(x[i] == "Medium/High"){
+      y[i] <- "M/H"
+    }else if(x[i] == "Low/Low"){
+      y[i] <- "L/L"
+    }else if(x[i] == "Low/Medium"){
+      y[i] <- "L/M"
+    }else if(x[i] == "Low/High"){
+      y[i] <- "L/H"
+    }else {
+      y[i] <- x[i]
+    }
+      
+  } 
+  return(y)
+}
+
+fifa_data$work_rate <- replace(fifa_data$work_rate)
+
 ggbetweenstats(
   data = fifa_data,
   x = work_rate,
@@ -228,12 +312,21 @@ ggbetweenstats(
     panel.grid.major.y = element_line(linetype = "dashed"),
     panel.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4"),
     plot.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4")
-  )
+  ) + theme(
+  plot.caption = element_text(hjust = 0)
+  ) + labs(caption = "Fig. 7. Differences in overall rating among the nine different categories of working rate 
+of the FIFA World Cup players. H = High, M = Medium, L = Low. The rating
+was done by comparing the offensive working rate to the defensive working rate of the players") +
+  theme(plot.caption = element_text(hjust=0))
 
 #View(paletteer::palettes_d_names)
 ```
 
-### Just some test analysis- not necessary 
+Work rate of the players is very important in football game. It help increases the chance of winning ball possession and decreasing the possibility of conceding goals. The work rate of the players on a scale of high, medium, and low assessed based on the attacking (offensive) vs defensive working rate. This help measure if the player has the same offensive working rate as the defensive working rate and vice versa. Knowledge of players working rate is very key to deciding the formation or strategy of the team for a particular game. In fig 7, we compared the OVR of the FIFA players with respect to their working rate. The purpose is to understand the disparity in offensive vs defensive working rate in the OVR of the players. We found that, the OVR differs significantly among the nine different categories of working rate. On the average, players with high offensive and defensive working rate has the highest OVR (mean = 70.41), followed by players with medium offensive and high defensive working rate (mean = 68.37), high offensive and low defensive working rate (mean = 68.10), and high offensive and medium defensive working rate (mean = 68.06), respectively. While players with low offensive and defensive working rate have the least OVR (mean = 61.86).
+
+!\[alt text\](IMG_4565.png)
+
+### Just some test analysis- not necessary
 
 ```{r}
 install.packages("ggfortify")
