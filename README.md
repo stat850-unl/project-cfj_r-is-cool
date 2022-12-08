@@ -350,18 +350,14 @@ We used random forest regression (Breiman et al. 2001) to model the relationship
 We will evaluate this using the ggbetweenstats function from the ggstatsplots (an extension of the ggplot2 package) package in R core team ver 4.1.2. The ggstatsplots package produces an elegant violin-box plot with statistical annotations to explore if there is any significant difference in the contribution of the players' preferred foot, international reputation, weak foot skill and skill moves on the overall FIFA ratings of the players. Here, we will make a separate violin-box plot for each of the following explanatory variables (all treated as categorical or factor variables): preferred foot, international reputation, weak foot skill, skill moves, and working rate. The OVR of the players is the response variable. 
 
 ### 2.2.3 What factors contribute to the wage of a player who participated in the world cup?
-We performed a multiple linear regression to determine factors that contribute to the wage or salary of a player who participated in the world cup. The assumptions required for this analysis was taken into consideration, i.e, Normality and Independence.  These assumptions were verified by first making correlation plots(correlation pairs) to determine which variables are correlated with one another, especially with the response variables Wage_eur. The variables that had higher correlation coefficients were selected for the regression model. We further analyzed the distribution of the selected variables by making histograms, scatter and other plots to analyze the normality of the data set. We proceed to finding an appropriate model for the data and also look at colinearity.
+We performed a multiple linear regression to determine factors that contribute to the wage or salary of a player who participated in the world cup. The assumptions required for this analysis was taken into consideration, i.e, Normality and Independence.  These assumptions were verified by first making correlation plots(correlation pairs) to determine which variables are correlated with one another, especially with the response variables Wage_eur. The variables that had higher correlation coefficients were selected for the regression model. After deriving the model, we also made residual plots to check the normality assumption. The first residual plots we made showed that the data violated the assumptions for the simple linear regression and multiple linear regression. Therefore, we made a transformation on the data by using the log to the base ten function and also the square root function. The variables used to develop the model were International Reputation, Overall player rating, Passing, Dribbling and Wage. The wage of a player was the response variable and  International Reputation, Overall player rating, Passing, Dribbling served as our explanatory variable.
 
-### 2.2.4 What is the probability that a player would be called for the World Cup based on his age?
-We looked at the chances of a player being called up for the world cup, first, based on his age alone and the combination of age and other variables. We made a data frame containing the variable Age and calculated the frequency for the various ages. The probablity was determined using the frequentist approach to calculating probability.
 
 # 3.0 RESULT and DISCUSION
 ## 3.1 The main compositions contribute disproportionately to the OVR of the players
 >>>>>>> 4fec1271d43bbbb238022dbf40b323929fc269ee
 
-### Overall assessment
 
-At the moment, I don’t have any idea about
 
 - To obtain this file you would need to use the link
   <https://kaggle.com>.
