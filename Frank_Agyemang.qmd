@@ -1,5 +1,9 @@
 ---
+<<<<<<< HEAD
 title: "John Mensah_FIFA World Cup Analysis"
+=======
+title: "Frank Agyemang World Cup Analysis"
+>>>>>>> 34b6d5ddf7466f790bc71c78e6923945ff96488c
 format: html
 editor: visual
 ---
@@ -10,7 +14,11 @@ fifa_data <- read.csv("players_20.csv")
 
 ```
 
+<<<<<<< HEAD
 ## The interrelationship among players' individual ratings.
+=======
+## The interrelationship among players' individual ratings
+>>>>>>> 34b6d5ddf7466f790bc71c78e6923945ff96488c
 
 ```{r}
 #player_rate <- fifa_data %>% select(, 45:78)
@@ -49,6 +57,14 @@ ggplot(player_rate, mapping = aes(x = shooting)) + geom_histogram()
 ## How do these individual player ratings contribute to the overall rating of the player?
 
 ```{r}
+<<<<<<< HEAD
+=======
+# install.packages("glmmTMB")
+# install.packages("MuMIn")
+# install.packages("DHARMa")
+# install.packages("broom.mixed")
+
+>>>>>>> 34b6d5ddf7466f790bc71c78e6923945ff96488c
 library(glmmTMB)
 library(MuMIn)
 library(DHARMa)
@@ -145,6 +161,7 @@ cowplot::plot_grid(plotlist = all_plots,
 
 ```
 
+<<<<<<< HEAD
 Loading additional libraries
 
 ```{r}
@@ -336,4 +353,333 @@ Model Selection
 library(leaps)
 best_model <- regsubsets(wage_eur ~ ., football_data_sub, nvmax = 19)
 
+=======
+We try to answer the question below
+
+\## What factors contribute to the salary of a player?
+
+Sports is one of the attractive field in our world today because of the numerous benefits such as the recognition and the money. Like many other known sports, football is no exception. It is known that sportsmen are among the highly paid professionals in our world today. Nevertheless, an interesting debate that pops up most of the time is on what should be the right salary for a footballer. For some football lovers certain players deserve the amount they take whilst others do not. In this work, we try to determine some factors that could influence the wage of a player(s) who participate in the FIFA world cup. The variables we consider will be Pace, Shooting, Passing, Dribbling, Defending , Physic,International reputation, overall, wage_eur.
+
+We could also use the information to determine the approximate budget for the world cup.
+
+The salary of a player has been a debate among football lovers for a long time.
+
+```{r}
+football_data <- read.csv("players_20.csv")
+
+summary(football_data)
+```
+
+selecting the variables of interest
+
+```{r}
+library(dplyr)
+
+football_data_sort <- football_data %>%
+
+  select(pace, shooting, passing, dribbling, defending, physic,international_reputation, overall, wage_eur)
+
+# football_data_sort
+
+```
+
+Now, I see that there are some missing data in some of the columns and therefore I have to remove them
+
+```{r}
+library(tidyverse)
+
+football_data_drop <- na.omit(football_data_sort)
+
+football_data_drop
+
+# length(football_data_drop$pace)
+
+```
+
+Plots of the variables
+
+```{r}
+library(ggplot2)
+
+# plot(football_data_drop, pch = 9)
+
+## Correlation plots
+
+library(corrplot)
+
+corrplot(corr = cor(football_data_drop),
+
+         addCoef.col = "black",
+
+         number.cex = 0.5,
+
+         number.digits =1 ,
+
+         diag = F,
+
+         bg = "magenta" ,
+
+         outline = "black",
+
+         addgrid.col = "white",
+
+         mar = c(1,1,1,1))
+
+```
+
+We make correlation plots to determine the level of association various pairs of explanatory variables and response variables. In the plot shown, variables that are negatively correlated have a color of brown and variables that are positively correlated have a color of light blue. It can be seen that International reputation and the overall rating of a player in the FIFA world has the strongest positive correlation with wage followed by the passing and dribbling skills of a player.
+
+Looking at the correlation plots there are also some level of association between some pairs of explanatory variables. For example, the overall rating of a player is strong and positively correlated with passing, dribbling and shooting.
+
+\## We now perform simple linear regression using variables that had a correlation coefficient greater than or equal to 5. That is, Overall Reputation and International reputation.
+
+```{r}
+library(dplyr)
+
+# football_data_drop
+
+library(linearModel)
+
+int_rep <- lm(football_data_drop$wage_eur ~ football_data_drop$international_reputation,data = football_data_drop)
+
+anova(int_rep)
+
+# int_rep
+
+plot(int_rep,pch=7)
+
+# hist(football_data_drop$international_reputation)
+
+library(moments)
+
+skewness(football_data_drop$international_reputation, na.rm = TRUE) 
+
+
+```
+
+We can see that the residual plots show that there is unequal spread of data points and in the Normal Q-Q plots, the data points gradually move far away from the fitted line. Hence, the data does not follow a normal distribution and this can also be confirmed by the histogram plot which is also skewed. The value for skewness is far greater than 1 and that is worrying. Therefore we need to transform the data.
+
+Residual Plots
+
+```{r}
+library(tidyverse)
+
+library(broom)
+
+theme_set(theme_classic())
+
+int_rep.diag.metrics <- augment(int_rep)
+
+head(int_rep.diag.metrics)
+
+```
+
+```{r}
+library(ggplot2)
+
+ggplot(int_rep.diag.metrics, aes(football_data_drop$international_reputation,football_data_drop$wage_eur )) +
+
+  geom_point() +
+
+  stat_smooth(method = lm, se = FALSE) +
+
+  geom_segment(aes(xend = football_data_drop$international_reputation, yend = .fitted), color = "red", size = 0.3)
+
+```
+
+```{r}
+library(dplyr)
+
+# football_data_drop
+
+library(linearModel)
+
+overall_model <- lm(football_data_drop$wage_eur ~ football_data_drop$overall,data = football_data_drop)
+
+anova(int_rep)
+
+overall_model
+
+plot(overall_model,pch=7)
+
+#hist(football_data_drop$international_reputation)
+
+library(moments)
+
+skewness(football_data_drop$overall, na.rm = TRUE)
+```
+
+From the above plots, I want to transform all the variables so that they follow a normal distribution.
+
+```{r}
+speed_transformed <- qplot(x = log10(pace + 1),data = football_data_drop)
+
+int_rep_transformed <- qplot(x = sqrt(international_reputation),data = football_data_drop)
+
+overall_transformed <- qplot(x = log10(overall + 1),data = football_data_drop)
+
+passing_transformed <- qplot(x = log10(passing + 1),data = football_data_drop)
+
+dribbling_transformed <- qplot(x = log10(dribbling + 1),data = football_data_drop)
+
+wage_transformed <- qplot(x=log10(wage_eur + 1),data = football_data_drop)
+
+# speed_transformed
+
+# int_rep_transformed
+
+# overall_transformed
+
+# passing_transformed
+
+# dribbling_transformed
+
+# wage_transformed
+```
+
+```{r}
+library(dplyr)
+
+pace_transformed <- log10(football_data_drop$pace + 1)
+
+int_rep_transformed <-  sqrt(football_data_drop$international_reputation)
+
+overall_transformed <- log10(football_data_drop$overall + 1)
+
+passing_transformed <- log10(football_data_drop$passing + 1)
+
+dribbling_transformed <- log10(football_data_drop$dribbling + 1)
+
+wage_transformed <- log10(football_data_drop$wage_eur + 1)
+
+football_data_drop <- football_data_drop%>%
+
+   mutate(pace_transformed = pace_transformed, int_rep_transformed = int_rep_transformed,
+
+         overall_transformed = overall_transformed, passing_transformed = passing_transformed,
+
+         dribbling_transformed = dribbling_transformed, wage_transformed = wage_transformed)
+```
+
+\`
+
+We now re-run the models
+
+```{r}
+library(linearModel)
+
+overall_model <- lm(football_data_drop$wage_transformed ~ football_data_drop$overall_transformed,data = football_data_drop)
+
+anova(int_rep)
+
+overall_model
+
+pace_model <- lm(football_data_drop$wage_transformed ~ football_data_drop$pace_transformed,data = football_data_drop)
+
+anova(pace_model)
+
+pace_model
+
+int_rep_model <- lm(football_data_drop$wage_transformed ~ football_data_drop$int_rep_transformed,data = football_data_drop)
+
+anova(int_rep_model)
+
+int_rep_model
+
+# pace_model <- lm(football_data_drop$wage_transformed ~ football_data_drop$speed_transformed,data = football_data_drop)
+
+# anova(pace_model)
+
+# pace_model
+
+dribbling_model <- lm(football_data_drop$wage_transformed ~ football_data_drop$dribbling_transformed,data = football_data_drop)
+
+anova(dribbling_model)
+
+dribbling_model
+```
+
+We look at the residual plots again
+
+```{r}
+library(tidyverse)
+
+library(broom)
+
+theme_set(theme_classic())
+
+int_rep_model.diag.metrics <- augment(int_rep_model)
+
+overall_model.diag.metrics <- augment(overall_model)
+
+pace_model.diag.metrics <- augment(pace_model)
+
+dribbling_model.diag.metrics <- augment(dribbling_model)
+
+head(int_rep_model.diag.metrics)
+
+head(overall_model.diag.metrics)
+
+head(pace_model.diag.metrics)
+
+head(dribbling_model.diag.metrics)
+```
+
+```{r}
+library(ggplot2)
+
+ggplot(int_rep_model.diag.metrics, aes(football_data_drop$int_rep_transformed,football_data_drop$wage_transformed )) +
+
+  geom_point() +
+
+  stat_smooth(method = lm, se = FALSE) +
+
+  geom_segment(aes(xend = football_data_drop$int_rep_transformed, yend = .fitted), color = "red", size = 0.3)
+
+ggplot(overall_model.diag.metrics, aes(football_data_drop$overall_transformed,football_data_drop$wage_transformed )) +
+
+  geom_point() +
+
+  stat_smooth(method = lm, se = FALSE) +
+
+  geom_segment(aes(xend = football_data_drop$overall_transformed, yend = .fitted), color = "red", size = 0.3)
+```
+
+```{r}
+ggplot(pace_model.diag.metrics, aes(football_data_drop$pace_transformed,football_data_drop$wage_transformed )) +
+
+  geom_point() +
+
+  stat_smooth(method = lm, se = FALSE) +
+
+  geom_segment(aes(xend = football_data_drop$pace_transformed, yend = .fitted), color = "red", size = 0.3)
+```
+
+Now i make a regression model taking into consideration all the selected factors at the same time.
+
+```{r}
+library(linearModel)
+
+multiple_reg <- lm(football_data_drop$wage_transformed ~ football_data_drop$pace_transformed +football_data_drop$int_rep_transformed + football_data_drop$overall_transformed + football_data_drop$pace_transformed, data = football_data_drop)
+
+anova(multiple_reg)
+
+multiple_reg
+```
+
+Residual plots
+
+```{r}
+res <- resid(multiple_reg)
+
+plot(fitted(multiple_reg), res,pch=1)
+
+abline(0,0)
+
+qqnorm(res)
+
+#add a straight diagonal line to the plot
+
+qqline(res)
+>>>>>>> 34b6d5ddf7466f790bc71c78e6923945ff96488c
 ```
