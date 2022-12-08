@@ -185,7 +185,6 @@ summary(football_data)
 ```
 
 ```{r}
-library(dplyr)
 football_data_sub <- football_data %>%
   select(short_name,age,height_cm, weight_kg,overall, wage_eur,player_positions,attacking_crossing,attacking_heading_accuracy,attacking_short_passing,attacking_volleys,attacking_finishing)
 
@@ -329,15 +328,3 @@ attacking_finish_model_3  <- lm(stand$attacking_finishing ~ stand$stAge * stand$
 
 summary(attacking_finish_model_3)
 ```
-<<<<<<< HEAD:Frank_Agyemang.qmd
-
-Model Selection
-
-```{# {r}
-# #install.packages("leaps")
-# library(leaps)
-# best_model <- regsubsets(wage_eur ~ ., football_data_sub, nvmax = 19)
-
-```
-=======
->>>>>>> c2bb4251cbffb0eb32f96af5d67d60de28f36b5b:FIFA World Cup_John Mensah.qmd
