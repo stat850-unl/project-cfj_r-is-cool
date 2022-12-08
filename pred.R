@@ -7,14 +7,14 @@ library(tidyverse)
 
 # Read data
 fifa_data <- read.csv("players_20.csv")
-rating <- fifa_data %>% select(,11,17,32:37)
+rating <- fifa_data %>% select(,11,32:37)
 rating <- na.omit(rating)
 rating <- rating[!apply(rating == "", 1, all), ]
 # Build model
-model <- randomForest(overall ~ ., data = rating, ntree = 1000, mtry = 7, importance = TRUE)
+model <- randomForest(overall ~ ., data = rating, ntree = 100, mtry = 6, importance = TRUE)
 
 # Save model to RDS file
-# saveRDS(model, "model.rds")
+ #saveRDS(model, "model.rds")
 
 # Read in the RF model
 #model <- readRDS("model.rds")
