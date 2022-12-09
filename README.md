@@ -71,36 +71,18 @@ The ability of a football player to equally use the weak foot as the preferred f
 
 Skill moves are also very important in the game of association football. Players with low-skill moves are most likely to lose possession of the ball or have less dribbling efficiency. Fig 6 also showed that higher-skill moves significantly increase the player's OVR.
 
-<<<<<<< HEAD
-![](Rplot6.png)
-<<<<<<< HEAD
-=======
-![](Expensive_teams.jpeg)
-From the graph above, FC Barcelona, Real Madrid, Manchester City, FC Bayern Munchen and Liverpool are the top five expensive teams. The top two teams are from Spain. We also have two teams from England and one team from Germany. 
-![](Barcelona's_rating.jpeg)
-Since FC Barcelona is the top paying football club, we take a look deep into their players rating in the graph above. This team has at least 11 players with an overall rating greater than or equal to 85. 
-
->>>>>>> bbdd983a0f03446b4fef844f4a616014faa183c3
->>>>>>> 4fec1271d43bbbb238022dbf40b323929fc269ee
-
-=======
 ![](Fig6.png)
 
 The work rate of the players is very important in a football game. It helps increase the chance of winning ball possession and decrease the possibility of conceding goals. The work rate of the players on a scale of high, medium, and low was assessed based on the attacking (offensive) vs defensive working rate. This help measures if the player has the same offensive working rate as the defensive working rate and vice versa. Knowledge of players' working rates is very key to deciding the formation or strategy of the team for a particular game. In fig 7, we compared the OVR of the FIFA players concerning their working rate. The purpose is to understand the disparity in offensive vs defensive working rate in the OVR of the players. We found that the OVR differs significantly among the nine different categories of working rate. On average, players with high offensive and the defensive working rate has the highest OVR (mean = 70.41), followed by players with medium offensive and high defensive working rate (mean = 68.37), high offensive and low defensive working rate (mean = 68.10), and high offensive and medium defensive working rate (mean = 68.06), respectively. While players with low offensive and defensive working rates have the least OVR (mean = 61.86). 
 
 ![](Fig7.png)
->>>>>>> 34b6d5ddf7466f790bc71c78e6923945ff96488c
 
+From the graph Below, FC Barcelona, Real Madrid, Manchester City, FC Bayern Munchen and Liverpool are the top five teams that are paying a lot of money to their players. The top two teams are from Spain. We also have two teams from England and one team from Germany. 
+![](Expensive_teams.jpeg)
 
-The distribution of the age was identified to be normally distributed. This is shown by a histogram plot included in the picture below. Also, correlation pairs are plotted to determine the strength of association between all pairs of variables.
-![](Rplot.png)
-![](Rplot03.png)
+Since FC Barcelona is the top paying football club, we take a look deep into their players rating in the graph above. This team has at least 11 players with an overall rating greater than or equal to 85. 
+![](Barcelona's_rating.jpeg)
 
-
-![](Rplot01.png)
-![](Rplot02.png)
-![](Rplot05.png)
-![](Rplot06.png)
 # 4.0 CONCLUSION
 I am waiting for the result from you guys so I can summarize everything here. 
 

@@ -143,7 +143,24 @@ football_data %>%
     limits = c(0,700000000),
     breaks = seq(0,700000000, by= 200000000))+
   theme(axis.title.y = element_blank())+
-  ggtitle("Most expensive football clubs")
+  ggtitle("Most expensive football clubs")+
+      theme(axis.text=element_text(size=12),
+        axis.title=element_text(size=15,face="bold"))+
+  theme(legend.text = element_text(size = 12)) +
+  theme(plot.title = element_text(size = 20, face = "bold")) +
+  theme(text = element_text(size = 17))+
+labs(caption = 
+"Fig.8. Top football clubs paying more money to their players") +
+  theme(plot.caption = element_text(hjust=0))+
+    theme(
+    axis.line = element_line(colour = "grey50"),
+    panel.grid = element_line(color = "#b4aea9"),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_line(linetype = "dashed"),
+    panel.grid.major.y = element_blank(),
+    panel.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4"),
+    plot.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4")
+  )
 
 ggsave(path = "/Users/cb/Desktop/project-cfj_r-is-cool", file = "Expensive_teams.jpeg", width = 12, height =8, dpi=700)
 
@@ -171,7 +188,19 @@ football_data %>%
         axis.title=element_text(size=15,face="bold"))+
   theme(legend.text = element_text(size = 15)) +
   theme(plot.title = element_text(size = 20, face = "bold")) +
-  theme(text = element_text(size = 17))  
+  theme(text = element_text(size = 17))+
+labs(caption = 
+"Fig.9. FC Barcelona's players rating") +
+  theme(plot.caption = element_text(hjust=0))+
+    theme(
+    axis.line = element_line(colour = "grey50"),
+    panel.grid = element_line(color = "#b4aea9"),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4"),
+    plot.background = element_rect(fill = "#fbf9f4", color = "#fbf9f4")
+  )
 
 ggsave(path = "/Users/cb/Desktop/project-cfj_r-is-cool", file = "Barcelona's_rating.jpeg", width = 16, height =8, dpi=700)
 
