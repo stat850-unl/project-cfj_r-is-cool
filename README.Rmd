@@ -163,10 +163,14 @@ ggplot(data = football_data)+
     stat = "identity",
     width= 0.5
   )+
+<<<<<<< HEAD
+  theme_bw()
+=======
   theme_bw()+
   ggtitle("Overal rating per players position")
   ggtitle("Overal rating per players position")+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+>>>>>>> bbdd983a0f03446b4fef844f4a616014faa183c3
 
 
 ```
@@ -183,27 +187,9 @@ football_data %>%
   geom_col(position = "dodge")+
   geom_text(aes(label=Exp), position = position_dodge(width = 0.5), vjust=-0.5, size = 2) + xlab("Name of players") + ylab("Rating of players (%)") +
   scale_fill_manual(values = c("#065535","#0000b3"))+
-  theme_bw() + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
-  ggtitle("FC Balcelona's players rating")
+  theme_bw() + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
 ```
 
-```{r}
-football_data %>% 
-  group_by(club) %>% 
-  filter(value_eur>=3.15e+07) %>% 
-  summarise(total_value= sum(as.integer(value_eur), na.rm=TRUE)) %>% 
-  ggplot(aes(reorder(club, total_value), total_value, fill= total_value))+
-  geom_col(show.legend = TRUE)+
-  theme_bw()+
-  coord_flip()+
-  scale_y_continuous(
-    name = "Football clubs values (€)",
-    limits = c(0,700000000),
-    breaks = seq(0,700000000, by= 200000000))+
-  theme(axis.title.y = element_blank())+
-  ggtitle("Most expensive football clubs")
-  
- #labels = c("0 €", "1 Billion €","2 Billion €","3 Billion €","4 Billion €","5 Billion €","6 Billion €","7 Billion €","8 Billion €"
-```
+
 
